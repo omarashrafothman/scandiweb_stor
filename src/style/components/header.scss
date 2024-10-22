@@ -1,0 +1,28 @@
+header {
+    z-index: 1000;
+
+    .nav-item {
+        font-weight: 600;
+        padding-bottom: 1rem;
+        margin-right: 1rem;
+        line-height: 19px;
+        text-transform: capitalize;
+
+    }
+
+    .shoppingCart {
+        button {
+            img {
+                width: 2rem;
+            }
+        }
+    }
+
+    .nav-item.active {
+        a {
+            color: #5ECE7B !important;
+        }
+
+        border-bottom: 2px solid #5ECE7B;
+    }
+}
