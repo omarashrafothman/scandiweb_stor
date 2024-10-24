@@ -77,7 +77,7 @@ class Header extends Component {
                                 ))}
                             </ul>
                             <div>
-                                <a className="navbar-brand" href="/category/all">
+                                <a className="navbar-brand" href="/">
                                     <img src={logo} alt='logo' />
                                 </a>
                             </div>
