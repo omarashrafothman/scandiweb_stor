@@ -165,7 +165,7 @@ export default class Cart extends Component {
                     <img src={cartImage} alt="cart icon" />
                 </button>
 
-                <div className="modal fade" id="exampleModal">
+                <div className="modal fade" id="exampleModal" data-testid="cart-overlay">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-body">
@@ -174,7 +174,7 @@ export default class Cart extends Component {
                                     <p className="m-0">{cartElements.length} {cartElements.length <= 1 ? "item" : "items"}</p>
                                 </div>
 
-                                <div className="cartItemsContainer my-2" data-testid='cart-total'>
+                                <div className="cartItemsContainer my-2" >
                                     {cartElements.length > 0 ? (
                                         cartElements.map((cartItem, attrItemIndex) => (
                                             <div className="cartItem w-100 d-flex" key={cartItem.id}>
