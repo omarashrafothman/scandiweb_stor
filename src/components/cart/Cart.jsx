@@ -185,7 +185,7 @@ export default class Cart extends Component {
                                                         {this.calculateTotalPrice(cartItem).toFixed(2)}
                                                     </p>
 
-                                                    <div className="productAttr">
+                                                    <div className="productAttr" >
                                                         {cartItem.product.attributes.map((attrItem, index) => {
                                                             let content;
                                                             switch (attrItem.name) {

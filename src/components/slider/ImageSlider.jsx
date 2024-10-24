@@ -33,7 +33,7 @@ class ImageSlider extends Component {
 
 
         return (
-            <div className="slider d-flex align-items-center flex-row-reverse ">
+            <div className="slider d-flex align-items-center flex-row-reverse " data-testid='product-gallery'>
                 <div className="mx-5">
                     <button className="prev" onClick={this.prevSlide}>
                         &lt;

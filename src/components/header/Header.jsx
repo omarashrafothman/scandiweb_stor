@@ -67,9 +67,8 @@ class Header extends Component {
                                     >
                                         <a
                                             className="nav-link"
-                                            aria-current="page"
                                             href={"/home/" + category.name}
-                                            data-testid={params === category.name ? 'active-category-link' : 'category-link'}
+                                            data-testid={params === category.name ? 'active-category-link category-link' : 'category-link'}
                                         >
                                             {category.name}
                                         </a>

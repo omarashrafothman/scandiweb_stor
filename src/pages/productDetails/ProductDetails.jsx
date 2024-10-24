@@ -128,7 +128,7 @@ class ProductDetails extends Component {
             <div>
                 <div className='container'>
                     <div className='productDetails d-flex justify-content-around flex-wrap my-5'>
-                        <div className='productDetailsGallery' data-testid='product-gallery'>
+                        <div className='productDetailsGallery' >
                             <ImageSlider images={product.galleries} />
                         </div>
                         <div className='productDetailsContent'>
