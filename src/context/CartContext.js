@@ -13,7 +13,7 @@ export class CartProvider extends Component {
     fetchCart = async () => {
 
         try {
-            const response = await fetch('http://localhost/php_projects/scandiweb_store/backend/index.php', {
+            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export class CartProvider extends Component {
       }
     `;
         try {
-            const response = await fetch('http://localhost/php_projects/scandiweb_store/backend/index.php', {
+            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export class CartProvider extends Component {
 
     clearCart = async () => {
         try {
-            const response = await fetch('http://localhost/php_projects/scandiweb_store/backend/index.php', {
+            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ class Header extends Component {
     fetchCategories = async () => {
         try {
 
-            const response = await fetch('http://localhost/php_projects/scandiweb_store/backend/index.php', {
+            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

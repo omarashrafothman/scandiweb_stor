@@ -56,7 +56,7 @@ class ProductDetails extends Component {
                 }
             `;
 
-            fetch('http://localhost/php_projects/scandiweb_store/backend/index.php', {
+            fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +99,6 @@ class ProductDetails extends Component {
     render() {
         const { product, loading, error, selectedAttributes } = this.state;
 
-        // تعيين قيمة افتراضية إذا لم تكن الخاصية موجودة
         const capacity = selectedAttributes['Capacity'] || null;
         const color = selectedAttributes['Color'] || null;
         const size = selectedAttributes['Size'] || null;
