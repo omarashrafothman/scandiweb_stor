@@ -61,7 +61,7 @@ class Header extends Component {
                             <ul className="m-0 d-flex align-items-center pt-3">
                                 {categories.map((category) => (
                                     <li
-                                        data-testid='category-link'
+
                                         className={params === category.name ? "nav-item active" : "nav-item"}
                                         key={category.name}
                                     >
