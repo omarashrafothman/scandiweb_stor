@@ -185,7 +185,7 @@ export default class Cart extends Component {
                                                         {this.calculateTotalPrice(cartItem).toFixed(2)}
                                                     </p>
 
-                                                    <div className="productAttr" >
+                                                    {/*    <div className="productAttr" >
                                                         {cartItem.product.attributes.map((attrItem, index) => {
                                                             let content;
                                                             switch (attrItem.name) {
@@ -271,6 +271,95 @@ export default class Cart extends Component {
                                                             return content;
                                                         })}
                                                     </div>
+                                                    */}
+
+
+                                                    <div className="productAttr">
+                                                        {cartItem.product.attributes.map((attrItem, index) => {
+                                                            let content;
+                                                            switch (attrItem.name) {
+                                                                case "Color":
+                                                                    content = (
+                                                                        <div className="productColors" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
+                                                                            <p>{attrItem.name}:</p>
+                                                                            <div className="d-flex align-items-center w-75 sizesContainer my-2">
+                                                                                {attrItem.items.map((item, index) => (
+                                                                                    <label
+                                                                                        className="containerBlock colorItem"
+                                                                                        style={{ background: item.value }}
+                                                                                        key={index}
+                                                                                        data-testid={`cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.value)}`}
+                                                                                    >
+                                                                                        <input
+                                                                                            type="radio"
+                                                                                            name="color"
+                                                                                            value={item.value}
+                                                                                            checked={cartItem.color === item.value}
+                                                                                            data-testid={cartItem.color === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.value)}-selected` : undefined}
+                                                                                        />
+                                                                                        <span className="checkmark"></span>
+                                                                                    </label>
+                                                                                ))}
+                                                                            </div>
+                                                                        </div>
+                                                                    );
+                                                                    break;
+
+                                                                case "Capacity":
+                                                                    content = (
+                                                                        <div className="productSizes my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
+                                                                            <p>{attrItem.name}:</p>
+                                                                            {attrItem.items.map((item, index) => (
+                                                                                <label
+                                                                                    className="containerBlock my-1"
+                                                                                    key={index}
+                                                                                    data-testid={`cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}`}
+                                                                                >
+                                                                                    <input
+                                                                                        type="radio"
+                                                                                        name="capacity"
+                                                                                        value={item.display_value}
+                                                                                        checked={cartItem.capacity === item.display_value}
+                                                                                        data-testid={cartItem.capacity === item.display_value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}-selected` : undefined}
+                                                                                    />
+                                                                                    <span className="checkmark">{item.display_value}</span>
+                                                                                </label>
+                                                                            ))}
+                                                                        </div>
+                                                                    );
+                                                                    break;
+
+                                                                case "Size":
+                                                                    content = (
+                                                                        <div className="productSizes my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
+                                                                            <p>{attrItem.name}:</p>
+                                                                            {attrItem.items.map((item, index) => (
+                                                                                <label
+                                                                                    className="containerBlock my-1"
+                                                                                    key={index}
+                                                                                    data-testid={`cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}`}
+                                                                                >
+                                                                                    <input
+                                                                                        type="radio"
+                                                                                        name={`product[${index}]["size"]`}
+                                                                                        value={item.display_value}
+                                                                                        checked={cartItem.size === item.value}
+                                                                                        data-testid={cartItem.size === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}-selected` : undefined}
+                                                                                    />
+                                                                                    <span className="checkmark">{item.display_value}</span>
+                                                                                </label>
+                                                                            ))}
+                                                                        </div>
+                                                                    );
+                                                                    break;
+
+                                                                default:
+                                                                    content = null;
+                                                            }
+                                                            return content;
+                                                        })}
+                                                    </div>
+
                                                 </div>
 
                                                 <div className="w-50 d-flex justify-content-between align-items-center">
