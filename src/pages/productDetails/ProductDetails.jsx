@@ -37,6 +37,7 @@ class ProductDetails extends Component {
                         sku_id
                         name
                         description
+                        in_stock
                         galleries {
                             image_url
                         }
@@ -118,7 +119,7 @@ class ProductDetails extends Component {
             );
         }
 
-        // تعديل شرط التفعيل بحيث يتأكد من وجود قيم للخصائص المتاحة فقط
+
         const addToCartDisabled = (product.attributes.some(attr => attr.name === 'Capacity') && !capacity) ||
             (product.attributes.some(attr => attr.name === 'Color') && !color) ||
             (product.attributes.some(attr => attr.name === 'Size') && !size);
@@ -134,6 +135,7 @@ class ProductDetails extends Component {
                             <h3>{product.name}</h3>
 
                             {product.attributes.map((attrItem) => {
+
                                 let content;
                                 switch (attrItem.name) {
                                     case "Color":
@@ -152,6 +154,7 @@ class ProductDetails extends Component {
                                                                 name={attrItem.name}
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
+                                                                disabled={product.in_stock}
                                                             />
                                                             <span className="checkmark"></span>
                                                         </label>
@@ -172,14 +175,17 @@ class ProductDetails extends Component {
                                                             name={attrItem.name}
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
+                                                            disabled={product.in_stock}
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
                                                     </label>
+
                                                 ))}
                                             </div>
                                         );
                                         break;
                                 }
+
                                 return content;
                             })}
 
