@@ -12,9 +12,9 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
 
-          <Route index element={<Navigate to="/home/all" />} />
+          <Route index element={<Navigate to="/all" />} />
 
-          <Route path="home/:categoryName" element={<CategoryPage />} />
+          <Route path="/:categoryName" element={<CategoryPage />} />
           <Route path="product/:productId" element={<ProductDetails />} />
         </Route>
       </Routes>

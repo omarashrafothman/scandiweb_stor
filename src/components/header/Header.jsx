@@ -50,8 +50,9 @@ class Header extends Component {
 
 
         const { items, params } = this.props;
-        // if (loading) return <p>Loading categories...</p>;
+        if (loading) return <p>Loading categories...</p>;
         if (error) return <p>Error: {error}</p>;
+        console.log(params)
 
         return (
             <header>
@@ -60,7 +61,7 @@ class Header extends Component {
                         <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                             <ul className="m-0 d-flex align-items-center pt-3">
 
-                                {/*           {categories.map((category) => (
+                                {categories.map((category) => (
                                     <li
 
                                         className={params === category.name ? "nav-item active" : "nav-item"}
@@ -68,16 +69,16 @@ class Header extends Component {
                                     >
                                         <a
                                             className="nav-link"
-                                            href={"/home/" + category.name}
+                                            href={"/" + category.name}
                                             data-testid={params === category.name ? 'active-category-link category-link' : 'category-link'}
                                         >
                                             {category.name}
                                         </a>
                                     </li>
-                                ))}*/}
+                                ))}
 
 
-                                <li className={params === 'all' ? "nav-item active" : "nav-item"}>
+                                {/*          <li className={params === 'all' ? "nav-item active" : "nav-item"}>
 
                                     <a
                                         className="nav-link"
@@ -109,7 +110,7 @@ class Header extends Component {
                                         tech
                                     </a>
 
-                                </li>
+                                </li>*/}
                             </ul>
                             <div>
                                 <a className="navbar-brand" href="/">

@@ -11,7 +11,7 @@ class CategoryPage extends Component {
     };
 
     componentDidMount() {
-        const categoryName = window.location.pathname.split('/')[2];
+        const categoryName = window.location.pathname.split('/')[1];
         this.setState({ categoryName }, this.fetchProducts);
     }
 
