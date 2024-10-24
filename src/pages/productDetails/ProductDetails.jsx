@@ -135,12 +135,12 @@ class ProductDetails extends Component {
                             <h3>{product.name}</h3>
 
                             {product.attributes.map((attrItem) => {
-
+                                const testId = `product-attribute-${slugify(attrItem.name.toLowerCase())}`;
                                 let content;
                                 switch (attrItem.name) {
                                     case "Color":
                                         content = (
-                                            <div className='productColors' key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name)}`}>
+                                            <div className='productColors' key={attrItem.id} data-testid={testId}>
                                                 <p>{attrItem.name}:</p>
                                                 <div className="d-flex align-items-center w-75 sizesContainer my-2">
                                                     {attrItem.items.map((colorItem) => (
@@ -166,7 +166,7 @@ class ProductDetails extends Component {
 
                                     default:
                                         content = (
-                                            <div className="productSizes my-2" key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name)}`}>
+                                            <div className="productSizes my-2" key={attrItem.id} data-testid={testId}>
                                                 <p>{attrItem.name}:</p>
                                                 {attrItem.items.map((item) => (
                                                     <label className="containerBlock my-1" key={item.id}>
