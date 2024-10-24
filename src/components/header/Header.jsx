@@ -50,7 +50,7 @@ class Header extends Component {
 
 
         const { items, params } = this.props;
-        if (loading) return <p>Loading categories...</p>;
+        // if (loading) return <p>Loading categories...</p>;
         if (error) return <p>Error: {error}</p>;
 
         return (
@@ -59,7 +59,8 @@ class Header extends Component {
                     <div className="container">
                         <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                             <ul className="m-0 d-flex align-items-center pt-3">
-                                {categories.map((category) => (
+
+                                {/*           {categories.map((category) => (
                                     <li
 
                                         className={params === category.name ? "nav-item active" : "nav-item"}
@@ -73,7 +74,42 @@ class Header extends Component {
                                             {category.name}
                                         </a>
                                     </li>
-                                ))}
+                                ))}*/}
+
+
+                                <li className={params === 'all' ? "nav-item active" : "nav-item"}>
+
+                                    <a
+                                        className="nav-link"
+                                        href={"/home/all"}
+                                        data-testid={params === 'all' ? 'active-category-link category-link' : 'category-link'}
+                                    >
+                                        all
+                                    </a>
+
+                                </li>
+                                <li className={params === 'clothes' ? "nav-item active" : "nav-item"}>
+
+                                    <a
+                                        className="nav-link"
+                                        href={"/home/clothes"}
+                                        data-testid={params === 'clothes' ? 'active-category-link category-link' : 'category-link'}
+                                    >
+                                        clothes
+                                    </a>
+
+                                </li>
+                                <li className={params === 'tech' ? "nav-item active" : "nav-item"}>
+
+                                    <a
+                                        className="nav-link"
+                                        href={"/home/tech"}
+                                        data-testid={params === 'tech' ? 'active-category-link category-link' : 'category-link'}
+                                    >
+                                        tech
+                                    </a>
+
+                                </li>
                             </ul>
                             <div>
                                 <a className="navbar-brand" href="/">
