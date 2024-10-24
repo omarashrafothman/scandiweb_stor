@@ -67,7 +67,7 @@ export default class Cart extends Component {
 
     removeFromCartMutation = async (sku_id) => {
         try {
-            const response = await fetch('http://scandiwebstore.kesug.com', {
+            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ export default class Cart extends Component {
         const cart_id = 1;
 
         try {
-            const response = await fetch('http://scandiwebstore.kesug.com', {
+            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
