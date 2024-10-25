@@ -67,7 +67,7 @@ class Header extends Component {
                                         <a
                                             className="nav-link"
                                             href={"/" + category.name}
-                                            data-testid={params === category.name ? 'active-category-link category-link' : 'category-link'}
+                                            data-testid={params === category.name ? 'active-category-link' : 'category-link'}
                                         >
                                             {category.name}
                                         </a>
@@ -79,7 +79,7 @@ class Header extends Component {
                                     <img src={logo} alt='logo' />
                                 </a>
                             </div>
-                            <div className='shoppingCart'>
+                            <div className='shoppingCart' data-testid="cart-overlay">
                                 <Cart cartElements={cart} />
                             </div>
                         </div>

@@ -165,7 +165,7 @@ export default class Cart extends Component {
                     <img src={cartImage} alt="cart icon" />
                 </button>
 
-                <div className="modal fade" id="exampleModal" data-testid="cart-overlay">
+                <div className="modal fade" id="exampleModal" >
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-body">
