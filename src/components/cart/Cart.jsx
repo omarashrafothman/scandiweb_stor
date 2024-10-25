@@ -191,9 +191,9 @@ export default class Cart extends Component {
                                                             switch (attrItem.name) {
                                                                 case "Color":
                                                                     content = (
-                                                                        <div className="productColors" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
+                                                                        <div className="productColors" key={index}>
                                                                             <p>{attrItem.name}:</p>
-                                                                            <div className="d-flex align-items-center w-75 sizesContainer my-2">
+                                                                            <div className="d-flex align-items-center w-75 sizesContainer my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`}>
                                                                                 {attrItem.items.map((item, index) => (
                                                                                     <label
                                                                                         className="containerBlock colorItem"
@@ -206,9 +206,10 @@ export default class Cart extends Component {
                                                                                             name="color"
                                                                                             value={item.value}
                                                                                             checked={cartItem.color === item.value}
-                                                                                            data-testid={cartItem.color === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)} cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}`}
+                                                                                            data-testid={cartItem.color === item.value ? `cart-item-attribute-${slugify(item.value)}-${slugify(item.value)} cart-item-attribute-${slugify(item.value)}-${slugify(item.value)}-selected` : `cart-item-attribute-${slugify(item.value)}-${slugify(item.value)}`}
                                                                                         />
                                                                                         <span className="checkmark"></span>
+                                                                                        {console.log(attrItem.items[0].value)}
                                                                                     </label>
                                                                                 ))}
                                                                             </div>
@@ -230,7 +231,8 @@ export default class Cart extends Component {
                                                                                         name="capacity"
                                                                                         value={item.display_value}
                                                                                         checked={cartItem.capacity === item.display_value}
-                                                                                        data-testid={cartItem.capacity === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)} cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}`} />
+                                                                                        data-testid={cartItem.capacity === item.display_value ? `cart-item-attribute-${slugify(item.display_value)}-${slugify(item.display_value)} cart-item-attribute-${slugify(item.display_value)}-${slugify(item.display_value)}-selected` : `cart-item-attribute-${slugify(item.display_value)}-${slugify(item.display_value)}`}
+                                                                                    />
                                                                                     <span className="checkmark">{item.display_value}</span>
                                                                                 </label>
                                                                             ))}
@@ -253,8 +255,8 @@ export default class Cart extends Component {
                                                                                         name={`product[${attrItemIndex}]["size"]`}
                                                                                         value={item.display_value}
                                                                                         checked={cartItem.size === item.value}
-                                                                                        data-testid={cartItem.size === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)} cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}`} />
-                                                                                    <span className="checkmark">{item.display_value}</span>
+                                                                                        data-testid={cartItem.size === item.display_value ? `cart-item-attribute-${slugify(item.display_value)}-${slugify(item.display_value)} cart-item-attribute-${slugify(item.display_value)}-${slugify(item.display_value)}-selected` : `cart-item-attribute-${slugify(item.display_value)}-${slugify(item.display_value)}`}
+                                                                                    />                                                                                    <span className="checkmark">{item.display_value}</span>
                                                                                 </label>
                                                                             ))}
                                                                         </div>
