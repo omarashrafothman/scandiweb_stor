@@ -5,15 +5,14 @@ import Header from '../components/header/Header';
 export default class MainLayout extends Component {
 
     render() {
-        const param = window.location.pathname.split("/")[1];
 
 
+        const params = window.location.pathname.split('/')[1];
 
         return (
             <>
 
-                <Header params={param} />
-
+                <Header params={params} />
                 <Outlet />
             </>
         )
