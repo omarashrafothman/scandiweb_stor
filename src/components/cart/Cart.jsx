@@ -189,7 +189,7 @@ export default class Cart extends Component {
                                                         {cartItem.product.attributes.map((attrItem, index) => {
                                                             let content;
                                                             switch (attrItem.name) {
-                                                                case "Color":
+                                                                case "color":
                                                                     content = (
                                                                         <div className="productColors" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
                                                                             <p>{attrItem.name}:</p>
@@ -216,7 +216,7 @@ export default class Cart extends Component {
                                                                         </div>
                                                                     );
                                                                     break;
-                                                                case "Capacity":
+                                                                case "capacity":
                                                                     content = (
                                                                         <div className="productSizes my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
                                                                             <p>{attrItem.name}:</p>
@@ -239,7 +239,7 @@ export default class Cart extends Component {
                                                                     );
                                                                     break;
 
-                                                                case "Size":
+                                                                case "size":
                                                                     content = (
                                                                         <div className="productSizes my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
                                                                             <p>{attrItem.name}:</p>

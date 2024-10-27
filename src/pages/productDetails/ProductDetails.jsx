@@ -100,9 +100,9 @@ class ProductDetails extends Component {
     render() {
         const { product, loading, error, selectedAttributes } = this.state;
 
-        const capacity = selectedAttributes['Capacity'] || null;
-        const color = selectedAttributes['Color'] || null;
-        const size = selectedAttributes['Size'] || null;
+        const capacity = selectedAttributes['capacity'] || null;
+        const color = selectedAttributes['color'] || null;
+        const size = selectedAttributes['size'] || null;
 
 
 
@@ -120,9 +120,9 @@ class ProductDetails extends Component {
         }
 
 
-        const addToCartDisabled = (product.attributes.some(attr => attr.name === 'Capacity') && !capacity) ||
-            (product.attributes.some(attr => attr.name === 'Color') && !color) ||
-            (product.attributes.some(attr => attr.name === 'Size') && !size);
+        const addToCartDisabled = (product.attributes.some(attr => attr.name === 'capacity') && !capacity) ||
+            (product.attributes.some(attr => attr.name === 'color') && !color) ||
+            (product.attributes.some(attr => attr.name === 'size') && !size);
 
         return (
             <div>
@@ -138,7 +138,7 @@ class ProductDetails extends Component {
                                 const testId = `product-attribute-${slugify(attrItem.name.toLowerCase())}`;
                                 let content;
                                 switch (attrItem.name) {
-                                    case "Color":
+                                    case "color":
                                         content = (
                                             <div className='productColors' key={attrItem.id} data-testid={testId}>
                                                 <p>{attrItem.name}:</p>
@@ -154,7 +154,7 @@ class ProductDetails extends Component {
                                                                 name={attrItem.name}
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
-                                                                disabled={product.in_stock}
+                                                                disabled={!product.in_stock}
                                                             />
                                                             <span className="checkmark"></span>
                                                         </label>
@@ -175,7 +175,7 @@ class ProductDetails extends Component {
                                                             name={attrItem.name}
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
-                                                            disabled={product.in_stock}
+                                                            disabled={!product.in_stock}
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
                                                     </label>
