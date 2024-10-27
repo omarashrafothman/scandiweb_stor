@@ -185,53 +185,62 @@ export default class Cart extends Component {
                                                         {this.calculateTotalPrice(cartItem).toFixed(2)}
                                                     </p>
 
-                                                    <div className="productAttr" >
+                                                    <div className="productAttr">
                                                         {cartItem.product.attributes.map((attrItem, index) => {
+                                                            const attributeNameKebab = slugify(attrItem.name);
                                                             let content;
-                                                            switch (attrItem.name) {
-                                                                case "Color":
+
+                                                            switch (attrItem.name.toLowerCase()) {
+                                                                case "color":
                                                                     content = (
-                                                                        <div className="productColors" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
+                                                                        <div className="productColors" data-testid={`cart-item-attribute-${attributeNameKebab}`} key={index}>
                                                                             <p>{attrItem.name}:</p>
                                                                             <div className="d-flex align-items-center w-75 sizesContainer my-2">
-                                                                                {attrItem.items.map((item, index) => (
+                                                                                {attrItem.items.map((item, idx) => (
                                                                                     <label
                                                                                         className="containerBlock colorItem"
                                                                                         style={{ background: item.value }}
-                                                                                        key={index}
-                                                                                    // data-testid={`cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}`}
+                                                                                        key={idx}
+                                                                                        data-testid={
+                                                                                            cartItem.color === item.value
+                                                                                                ? `cart-item-attribute-${attributeNameKebab}-${attributeNameKebab}-selected`
+                                                                                                : `cart-item-attribute-${attributeNameKebab}-${attributeNameKebab}`
+                                                                                        }
                                                                                     >
                                                                                         <input
                                                                                             type="radio"
                                                                                             name="color"
                                                                                             value={item.value}
                                                                                             checked={cartItem.color === item.value}
-                                                                                            data-testid={cartItem.color === item.value ? `cart-item-attribute-${slugify(attrItem.value)}-${slugify(attrItem.value)} cart-item-attribute-${slugify(attrItem.value)}-${slugify(attrItem.value)}-selected` : `cart-item-attribute-${slugify(attrItem.value)}-${slugify(attrItem.value)}`}
                                                                                         />
                                                                                         <span className="checkmark"></span>
-
                                                                                     </label>
                                                                                 ))}
                                                                             </div>
                                                                         </div>
                                                                     );
                                                                     break;
-                                                                case "Capacity":
+
+                                                                case "capacity":
                                                                     content = (
-                                                                        <div className="productSizes my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
+                                                                        <div className="productSizes my-2" data-testid={`cart-item-attribute-${attributeNameKebab}`} key={index}>
                                                                             <p>{attrItem.name}:</p>
-                                                                            {attrItem.items.map((item, index) => (
+                                                                            {attrItem.items.map((item, idx) => (
                                                                                 <label
                                                                                     className="containerBlock my-1"
-                                                                                    key={index}
-                                                                                // data-testid={`cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}`}
+                                                                                    key={idx}
+                                                                                    data-testid={
+                                                                                        cartItem.capacity === item.display_value
+                                                                                            ? `cart-item-attribute-${attributeNameKebab}-${attributeNameKebab}-selected`
+                                                                                            : `cart-item-attribute-${attributeNameKebab}-${attributeNameKebab}`
+                                                                                    }
                                                                                 >
                                                                                     <input
                                                                                         type="radio"
                                                                                         name="capacity"
                                                                                         value={item.display_value}
                                                                                         checked={cartItem.capacity === item.display_value}
-                                                                                        data-testid={cartItem.capacity === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)} cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}`} />
+                                                                                    />
                                                                                     <span className="checkmark">{item.display_value}</span>
                                                                                 </label>
                                                                             ))}
@@ -239,29 +248,32 @@ export default class Cart extends Component {
                                                                     );
                                                                     break;
 
-                                                                case "Size":
+                                                                case "size":
                                                                     content = (
-                                                                        <div className="productSizes my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
+                                                                        <div className="productSizes my-2" data-testid={`cart-item-attribute-${attributeNameKebab}`} key={index}>
                                                                             <p>{attrItem.name}:</p>
-                                                                            {attrItem.items.map((item, index) => (
+                                                                            {attrItem.items.map((item, idx) => (
                                                                                 <label
                                                                                     className="containerBlock my-1"
-                                                                                    key={index}
-                                                                                // data-testid={`cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}`}
+                                                                                    key={idx}
+                                                                                    data-testid={
+                                                                                        cartItem.size === item.display_value
+                                                                                            ? `cart-item-attribute-${attributeNameKebab}-${attributeNameKebab}-selected`
+                                                                                            : `cart-item-attribute-${attributeNameKebab}-${attributeNameKebab}`
+                                                                                    }
                                                                                 >
                                                                                     <input
                                                                                         type="radio"
-                                                                                        name={`product[${attrItemIndex}]["size"]`}
+                                                                                        name="size"
                                                                                         value={item.display_value}
-                                                                                        checked={cartItem.size === item.value}
-                                                                                        data-testid={cartItem.size === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)} cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${slugify(attrItem.name)}`} />
+                                                                                        checked={cartItem.size === item.display_value}
+                                                                                    />
                                                                                     <span className="checkmark">{item.display_value}</span>
                                                                                 </label>
                                                                             ))}
                                                                         </div>
                                                                     );
                                                                     break;
-
 
                                                                 default:
                                                                     content = null;

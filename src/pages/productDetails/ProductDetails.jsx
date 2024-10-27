@@ -137,34 +137,36 @@ class ProductDetails extends Component {
 
 
                             {product.attributes.map((attrItem) => {
-                                const testId = `product-attribute-${slugify(attrItem.name)}`; // kebab case
-
+                                const attributeName = slugify(attrItem.name);
 
                                 let content;
-                                switch (attrItem.name) {
-                                    case "Color":
+                                switch (attrItem.name.toLowerCase()) {
+                                    case "color":
                                         content = (
-                                            <div className='productColors' key={attrItem.id} >
+                                            <div className='productColors' key={attrItem.id}>
                                                 <p>{attrItem.name}:</p>
-                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" >
-                                                    {attrItem.items.map((colorItem) => (
-                                                        <label
-                                                            className="containerBlock colorItem"
-                                                            style={{ background: colorItem.value }}
-                                                            key={colorItem.id}
-                                                            // data-testid={`product-attribute-${slugify(colorItem.value)}`}
-                                                            data-testid={`product-attribute-${slugify(attrItem.name)}`}
-                                                        >
-                                                            <input
-                                                                type="radio"
-                                                                name={attrItem.name}
-                                                                value={colorItem.value}
-                                                                onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
-                                                                disabled={!product.in_stock}
-                                                            />
-                                                            <span className="checkmark"></span>
-                                                        </label>
-                                                    ))}
+                                                <div className="d-flex align-items-center w-75 sizesContainer my-2">
+                                                    {attrItem.items.map((colorItem) => {
+                                                        const colorTestId = `product-attribute-${attributeName}-${slugify(colorItem.display_value)}`;
+                                                        console.log(colorTestId)
+                                                        return (
+                                                            <label
+                                                                className="containerBlock colorItem"
+                                                                style={{ background: colorItem.value }}
+                                                                key={colorItem.id}
+                                                                data-testid={colorTestId}
+                                                            >
+                                                                <input
+                                                                    type="radio"
+                                                                    name={attrItem.name}
+                                                                    value={colorItem.value}
+                                                                    onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
+                                                                    disabled={!product.in_stock}
+                                                                />
+                                                                <span className="checkmark"></span>
+                                                            </label>
+                                                        );
+                                                    })}
                                                 </div>
                                             </div>
                                         );
@@ -172,21 +174,23 @@ class ProductDetails extends Component {
 
                                     default:
                                         content = (
-                                            <div className="productSizes my-2" key={attrItem.id} >
+                                            <div className="productSizes my-2" key={attrItem.id}>
                                                 <p>{attrItem.name}:</p>
-                                                {attrItem.items.map((item) => (
-                                                    <label className="containerBlock my-1" key={item.id} data-testid={`product-attribute-${slugify(attrItem.name)}`}>
-                                                        <input
-                                                            type="radio"
-                                                            name={attrItem.name}
-                                                            value={item.value}
-                                                            onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
-                                                            disabled={!product.in_stock}
-                                                            data-testid={`product-attribute-${slugify(item.value)}`}
-                                                        />
-                                                        <span className="checkmark">{item.display_value}</span>
-                                                    </label>
-                                                ))}
+                                                {attrItem.items.map((item) => {
+                                                    const itemTestId = `product-attribute-${attributeName}-${slugify(item.value)}`;
+                                                    return (
+                                                        <label className="containerBlock my-1" key={item.id} data-testid={itemTestId}>
+                                                            <input
+                                                                type="radio"
+                                                                name={attrItem.name}
+                                                                value={item.value}
+                                                                onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
+                                                                disabled={!product.in_stock}
+                                                            />
+                                                            <span className="checkmark">{item.display_value}</span>
+                                                        </label>
+                                                    );
+                                                })}
                                             </div>
                                         );
                                         break;
