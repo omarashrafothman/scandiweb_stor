@@ -146,13 +146,14 @@ class ProductDetails extends Component {
                                         content = (
                                             <div className='productColors' key={attrItem.id} >
                                                 <p>{attrItem.name}:</p>
-                                                <div className="d-flex align-items-center w-75 sizesContainer my-2">
+                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" >
                                                     {attrItem.items.map((colorItem) => (
                                                         <label
                                                             className="containerBlock colorItem"
                                                             style={{ background: colorItem.value }}
                                                             key={colorItem.id}
-                                                            data-testid={`product-attribute-${slugify(colorItem.value)}`}
+                                                            // data-testid={`product-attribute-${slugify(colorItem.value)}`}
+                                                            data-testid={`product-attribute-${slugify(attrItem.name)}`}
                                                         >
                                                             <input
                                                                 type="radio"
@@ -174,7 +175,7 @@ class ProductDetails extends Component {
                                             <div className="productSizes my-2" key={attrItem.id} >
                                                 <p>{attrItem.name}:</p>
                                                 {attrItem.items.map((item) => (
-                                                    <label className="containerBlock my-1" key={item.id}>
+                                                    <label className="containerBlock my-1" key={item.id} data-testid={`product-attribute-${slugify(attrItem.name)}`}>
                                                         <input
                                                             type="radio"
                                                             name={attrItem.name}
