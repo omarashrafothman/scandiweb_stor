@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import ImageSlider from '../../components/slider/ImageSlider';
 import { htmlToText } from 'html-to-text';
@@ -54,8 +55,8 @@ class ProductDetails extends Component {
                             }
                         }
                     }
-                }
-            `;
+        }
+       ` ;
 
             fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
@@ -135,37 +136,31 @@ class ProductDetails extends Component {
                         <div className='productDetailsContent'>
                             <h3>{product.name}</h3>
 
-
                             {product.attributes.map((attrItem) => {
-                                const attributeName = slugify(attrItem.name);
-
+                                // const testId = product-attribute-${slugify(attrItem.name.toLowerCase())};
                                 let content;
-                                switch (attrItem.name.toLowerCase()) {
+                                switch (attrItem.name) {
                                     case "color":
                                         content = (
-                                            <div className='productColors' key={attrItem.id}>
+                                            <div className='productColors' key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
                                                 <p>{attrItem.name}:</p>
                                                 <div className="d-flex align-items-center w-75 sizesContainer my-2">
-                                                    {attrItem.items.map((colorItem) => {
-                                                        const colorTestId = `product-attribute-${attributeName}-${slugify(colorItem.display_value)}`;
-                                                        return (
-                                                            <label
-                                                                className="containerBlock colorItem"
-                                                                style={{ background: colorItem.value }}
-                                                                key={colorItem.id}
-                                                                data-testid={colorTestId}
-                                                            >
-                                                                <input
-                                                                    type="radio"
-                                                                    name={attrItem.name}
-                                                                    value={colorItem.value}
-                                                                    onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
-                                                                    disabled={!product.in_stock}
-                                                                />
-                                                                <span className="checkmark"></span>
-                                                            </label>
-                                                        );
-                                                    })}
+                                                    {attrItem.items.map((colorItem) => (
+                                                        <label
+                                                            className="containerBlock colorItem"
+                                                            style={{ background: colorItem.value }}
+                                                            key={colorItem.id}
+                                                        >
+                                                            <input
+                                                                type="radio"
+                                                                name={attrItem.name}
+                                                                value={colorItem.value}
+                                                                onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
+                                                                disabled={!product.in_stock}
+                                                            />
+                                                            <span className="checkmark"></span>
+                                                        </label>
+                                                    ))}
                                                 </div>
                                             </div>
                                         );
@@ -173,31 +168,28 @@ class ProductDetails extends Component {
 
                                     default:
                                         content = (
-                                            <div className="productSizes my-2" key={attrItem.id}>
+                                            <div className="productSizes my-2" key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
                                                 <p>{attrItem.name}:</p>
-                                                {attrItem.items.map((item) => {
-                                                    const itemTestId = `product-attribute-${attributeName}-${slugify(item.value)}`;
-                                                    return (
-                                                        <label className="containerBlock my-1" key={item.id} data-testid={itemTestId}>
-                                                            <input
-                                                                type="radio"
-                                                                name={attrItem.name}
-                                                                value={item.value}
-                                                                onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
-                                                                disabled={!product.in_stock}
-                                                            />
-                                                            <span className="checkmark">{item.display_value}</span>
-                                                        </label>
-                                                    );
-                                                })}
+                                                {attrItem.items.map((item) => (
+                                                    <label className="containerBlock my-1" key={item.id}>
+                                                        <input
+                                                            type="radio"
+                                                            name={attrItem.name}
+                                                            value={item.value}
+                                                            onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
+                                                            disabled={!product.in_stock}
+                                                        />
+                                                        <span className="checkmark">{item.display_value}</span>
+                                                    </label>
+
+                                                ))}
                                             </div>
                                         );
                                         break;
                                 }
+
                                 return content;
                             })}
-
-
 
                             <div className='productSizes'>
                                 <p>PRICE:</p>
