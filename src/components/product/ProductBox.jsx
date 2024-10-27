@@ -15,11 +15,11 @@ export default class ProductBox extends Component {
     render() {
         const { image, name, price, id, stock } = this.props;
         const productName = slugify(name);
-
+        console.log(!stock)
         return (
             <div className='productBox' data-testid={`product-${productName}`}>
                 {stock ? "" : <NavLink className='addToCart bo ' to={`/product/${id}`}> <img src={shoppingCart} alt='add to cart' /></NavLink>}
-                {stock ? <span className='stockStatus'>
+                {!stock ? <span className='stockStatus'>
                     <p>OUT OF STOCK</p>
                 </span> : ""}
                 <div className='productImageBox'>

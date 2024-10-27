@@ -14,7 +14,7 @@ class ProductDetails extends Component {
             loading: true,
             error: null,
             sku_id: Number(window.location.pathname.split("/")[2]),
-            selectedAttributes: [],
+            selectedAttributes: {},
         };
     }
 
@@ -64,6 +64,7 @@ class ProductDetails extends Component {
                 },
                 body: JSON.stringify({
                     query: query,
+                    variables: { skuId: sku_id },
                 }),
             })
                 .then((response) => response.json())
@@ -134,8 +135,11 @@ class ProductDetails extends Component {
                         <div className='productDetailsContent'>
                             <h3>{product.name}</h3>
 
+
                             {product.attributes.map((attrItem) => {
-                                const testId = `product-attribute-${slugify(attrItem.name.toLowerCase())}`;
+                                const testId = `product-attribute-${slugify(attrItem.name)}`; // kebab case
+
+
                                 let content;
                                 switch (attrItem.name) {
                                     case "Color":
@@ -154,7 +158,7 @@ class ProductDetails extends Component {
                                                                 name={attrItem.name}
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
-                                                                disabled={product.in_stock}
+                                                                disabled={!product.in_stock}
                                                             />
                                                             <span className="checkmark"></span>
                                                         </label>
@@ -175,19 +179,18 @@ class ProductDetails extends Component {
                                                             name={attrItem.name}
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
-                                                            disabled={product.in_stock}
+                                                            disabled={!product.in_stock}
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
                                                     </label>
-
                                                 ))}
                                             </div>
                                         );
                                         break;
                                 }
-
                                 return content;
                             })}
+
 
                             <div className='productSizes'>
                                 <p>PRICE:</p>
