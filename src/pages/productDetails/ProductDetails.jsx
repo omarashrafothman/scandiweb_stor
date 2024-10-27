@@ -101,9 +101,9 @@ class ProductDetails extends Component {
     render() {
         const { product, loading, error, selectedAttributes } = this.state;
 
-        const capacity = selectedAttributes['Capacity'] || null;
-        const color = selectedAttributes['Color'] || null;
-        const size = selectedAttributes['Size'] || null;
+        const capacity = selectedAttributes['capacity'] || null;
+        const color = selectedAttributes['color'] || null;
+        const size = selectedAttributes['size'] || null;
 
 
 
@@ -121,9 +121,9 @@ class ProductDetails extends Component {
         }
 
 
-        const addToCartDisabled = (product.attributes.some(attr => attr.name === 'Capacity') && !capacity) ||
-            (product.attributes.some(attr => attr.name === 'Color') && !color) ||
-            (product.attributes.some(attr => attr.name === 'Size') && !size);
+        const addToCartDisabled = (product.attributes.some(attr => attr.name === 'capacity') && !capacity) ||
+            (product.attributes.some(attr => attr.name === 'color') && !color) ||
+            (product.attributes.some(attr => attr.name === 'size') && !size);
 
         return (
             <div>
@@ -148,7 +148,6 @@ class ProductDetails extends Component {
                                                 <div className="d-flex align-items-center w-75 sizesContainer my-2">
                                                     {attrItem.items.map((colorItem) => {
                                                         const colorTestId = `product-attribute-${attributeName}-${slugify(colorItem.display_value)}`;
-                                                        console.log(colorTestId)
                                                         return (
                                                             <label
                                                                 className="containerBlock colorItem"
@@ -197,6 +196,7 @@ class ProductDetails extends Component {
                                 }
                                 return content;
                             })}
+
 
 
                             <div className='productSizes'>
