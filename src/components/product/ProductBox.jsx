@@ -17,8 +17,10 @@ export default class ProductBox extends Component {
         const productName = slugify(name);
         console.log(!stock)
         return (
-            <div className='productBox' data-testid={`product-${name}`}>
-                {!stock ? "" : <NavLink className='addToCart bo ' to={`/product/${id}`}> <img src={shoppingCart} alt='add to cart' /></NavLink>}
+            <div className='productBox' data-testid={`product-${productName}`}>
+                {!stock ? "" : <NavLink className='addToCart bo ' to={`/product/${id}`}>
+                    <img src={shoppingCart} alt='add to cart' />
+                </NavLink>}
                 {!stock ? <span className='stockStatus'>
                     <p>OUT OF STOCK</p>
                 </span> : ""}
