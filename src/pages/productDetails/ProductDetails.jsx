@@ -1,9 +1,10 @@
-
 import React, { Component } from 'react';
 import ImageSlider from '../../components/slider/ImageSlider';
 import { htmlToText } from 'html-to-text';
 import { CartContext } from '../../context/CartContext';
 import slugify from 'react-slugify';
+
+
 
 class ProductDetails extends Component {
     static contextType = CartContext;
@@ -55,8 +56,8 @@ class ProductDetails extends Component {
                             }
                         }
                     }
-        }
-       ` ;
+                }
+            `;
 
             fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
@@ -106,10 +107,6 @@ class ProductDetails extends Component {
         const color = selectedAttributes['color'] || null;
         const size = selectedAttributes['size'] || null;
 
-
-
-
-
         if (loading) return <p>Loading...</p>;
 
         if (error) {
@@ -121,105 +118,95 @@ class ProductDetails extends Component {
             );
         }
 
-
         const addToCartDisabled = (product.attributes.some(attr => attr.name === 'capacity') && !capacity) ||
             (product.attributes.some(attr => attr.name === 'color') && !color) ||
             (product.attributes.some(attr => attr.name === 'size') && !size);
 
         return (
-            <div>
-                <div className='container'>
-                    <div className='productDetails d-flex justify-content-around flex-wrap my-5'>
-                        <div className='productDetailsGallery' >
-                            <ImageSlider images={product.galleries} />
-                        </div>
-                        <div className='productDetailsContent'>
-                            <h3>{product.name}</h3>
+            <div className='container' data-testid='product-details-container'>
+                <div className='productDetails d-flex justify-content-around flex-wrap my-5'>
+                    <div className='productDetailsGallery' data-testid='product-gallery'>
+                        <ImageSlider images={product.galleries} />
+                    </div>
+                    <div className='productDetailsContent'>
+                        <h3>{product.name}</h3>
 
-                            {product.attributes.map((attrItem) => {
-                                // const testId = product-attribute-${slugify(attrItem.name.toLowerCase())};
-                                let content;
-                                switch (attrItem.name) {
-                                    case "color":
-                                        content = (
-                                            <div className='productColors' key={attrItem.id} >
-                                                <p>{attrItem.name}:</p>
-                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
-                                                    {attrItem.items.map((colorItem) => (
-                                                        <label
-                                                            className="containerBlock colorItem"
-                                                            style={{ background: colorItem.value }}
-                                                            key={colorItem.id}
-                                                        >
-                                                            <input
-                                                                type="radio"
-                                                                name={attrItem.name}
-                                                                value={colorItem.value}
-                                                                onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
-                                                                disabled={!product.in_stock}
-
-                                                                data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${colorItem.value}`}
-
-                                                            />
-                                                            <span className="checkmark"></span>
-                                                        </label>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        );
-                                        break;
-
-                                    default:
-                                        content = (
-                                            <div className="productSizes my-2" key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
-                                                <p>{attrItem.name}:</p>
-                                                {attrItem.items.map((item) => (
-                                                    <label className="containerBlock my-1" key={item.id}>
+                        {product.attributes.map((attrItem) => {
+                            let content;
+                            switch (attrItem.name) {
+                                case "color":
+                                    content = (
+                                        <div className='productColors' key={attrItem.id}>
+                                            <p>{attrItem.name}:</p>
+                                            <div className="d-flex align-items-center w-75 sizesContainer my-2" data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
+                                                {attrItem.items.map((colorItem) => (
+                                                    <label
+                                                        className="containerBlock colorItem"
+                                                        style={{ background: colorItem.value }}
+                                                        key={colorItem.id}
+                                                    >
                                                         <input
                                                             type="radio"
                                                             name={attrItem.name}
-                                                            value={item.value}
-                                                            onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
+                                                            value={colorItem.value}
+                                                            onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                             disabled={!product.in_stock}
-                                                            data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${item.value}`}
-
+                                                            data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${colorItem.value}`}
                                                         />
-                                                        <span className="checkmark">{item.display_value}</span>
+                                                        <span className="checkmark"></span>
                                                     </label>
-
                                                 ))}
                                             </div>
-                                        );
-                                        break;
-                                }
+                                        </div>
+                                    );
+                                    break;
 
-                                return content;
-                            })}
+                                default:
+                                    content = (
+                                        <div className="productSizes my-2" key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
+                                            <p>{attrItem.name}:</p>
+                                            {attrItem.items.map((item) => (
+                                                <label className="containerBlock my-1" key={item.id}>
+                                                    <input
+                                                        data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${item.value}`}
+                                                        type="radio"
+                                                        name={attrItem.name}
+                                                        value={item.value}
+                                                        onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
+                                                        disabled={!product.in_stock}
+                                                    />
+                                                    <span className="checkmark">{item.display_value}</span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                    );
+                                    break;
+                            }
 
-                            <div className='productSizes'>
-                                <p>PRICE:</p>
-                                <p className="priceNumber">
-                                    {product.prices[0].currency_symbol}{product.prices[0].amount}
-                                </p>
-                            </div>
+                            return content;
+                        })}
 
-                            <div className='my-4'>
+                        <div className='productSizes'>
+                            <p>PRICE:</p>
+                            <p className="priceNumber" data-testid="product-price">
+                                {product.prices[0].currency_symbol}{product.prices[0].amount}
+                            </p>
+                        </div>
 
+                        <div className='my-4'>
+                            <button
+                                className='cartBtn'
+                                type='submit'
+                                data-testid='add-to-cart'
+                                onClick={() => this.handleAddToCart(product.sku_id, color, size, capacity)}
+                                disabled={addToCartDisabled}
+                            >
+                                ADD TO CART
+                            </button>
+                        </div>
 
-                                <button
-                                    className='cartBtn'
-                                    type='submit'
-                                    data-testid='add-to-cart'
-                                    onClick={() => this.handleAddToCart(product.sku_id, color, size, capacity)}
-                                    disabled={addToCartDisabled}
-                                >
-                                    ADD TO CART
-                                </button>
-                            </div>
-
-                            <div className='productDet' data-testid='product-description'>
-                                {product.description}
-                            </div>
+                        <div className='productDet' data-testid='product-description'>
+                            {product.description}
                         </div>
                     </div>
                 </div>
@@ -229,3 +216,6 @@ class ProductDetails extends Component {
 }
 
 export default ProductDetails;
+
+
+
