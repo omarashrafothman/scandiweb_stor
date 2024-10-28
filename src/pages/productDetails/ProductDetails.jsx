@@ -142,9 +142,9 @@ class ProductDetails extends Component {
                                 switch (attrItem.name) {
                                     case "color":
                                         content = (
-                                            <div className='productColors' key={attrItem.id}>
+                                            <div className='productColors' key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
                                                 <p>{attrItem.name}:</p>
-                                                <div className="d-flex align-items-center w-75 sizesContainer my-2">
+                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" >
                                                     {attrItem.items.map((colorItem) => (
                                                         <label
                                                             className="containerBlock colorItem"
@@ -157,7 +157,7 @@ class ProductDetails extends Component {
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
-                                                                data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}
+
                                                             />
                                                             <span className="checkmark"></span>
                                                         </label>
@@ -169,7 +169,7 @@ class ProductDetails extends Component {
 
                                     default:
                                         content = (
-                                            <div className="productSizes my-2" key={attrItem.id} >
+                                            <div className="productSizes my-2" key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
                                                 <p>{attrItem.name}:</p>
                                                 {attrItem.items.map((item) => (
                                                     <label className="containerBlock my-1" key={item.id}>
@@ -179,7 +179,7 @@ class ProductDetails extends Component {
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
                                                             disabled={!product.in_stock}
-                                                            data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}
+
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
                                                     </label>
