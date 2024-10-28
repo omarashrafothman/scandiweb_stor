@@ -146,12 +146,8 @@ export default class Cart extends Component {
     render() {
         const { cartElements } = this.state;
 
-
-
-
-
         return (
-            <div data-testid="cart-overlay">
+            <div >
                 <button
                     data-testid='cart-btn'
                     type="button"
@@ -165,7 +161,7 @@ export default class Cart extends Component {
                     <img src={cartImage} alt="cart icon" />
                 </button>
 
-                <div className="modal fade" id="exampleModal" >
+                <div className="modal fade" id="exampleModal" data-testid="cart-overlay" >
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-body">
