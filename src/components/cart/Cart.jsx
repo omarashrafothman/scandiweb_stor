@@ -145,13 +145,13 @@ export default class Cart extends Component {
 
     render() {
         const { cartElements } = this.state;
-        // const { cart } = this.context;
+
 
 
 
 
         return (
-            <div >
+            <div data-testid="cart-overlay">
                 <button
                     data-testid='cart-btn'
                     type="button"
