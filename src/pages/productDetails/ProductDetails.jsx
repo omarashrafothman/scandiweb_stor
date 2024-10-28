@@ -140,7 +140,7 @@ class ProductDetails extends Component {
                                 switch (attrItem.name) {
                                     case "color":
                                         content = (
-                                            <div className='productColors' key={attrItem.id} >
+                                            <div className='productColors' key={attrItem.id}>
                                                 <p>{attrItem.name}:</p>
                                                 <div className="d-flex align-items-center w-75 sizesContainer my-2">
                                                     {attrItem.items.map((colorItem) => (

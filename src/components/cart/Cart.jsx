@@ -218,7 +218,7 @@ export default class Cart extends Component {
                                                                     break;
                                                                 case "capacity":
                                                                     content = (
-                                                                        <div className="productSizes my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
+                                                                        <div className="productSizes  my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
                                                                             <p>{attrItem.name}:</p>
                                                                             {attrItem.items.map((item, index) => (
                                                                                 <label
