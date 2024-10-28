@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProductBox from '../../components/product/ProductBox';
 import { GET_ALL_PRODUCT_WITH_CATEGORIES } from '../../graphql/queries.js';
-
+import slugify from 'react-slugify';
 class CategoryPage extends Component {
     state = {
         categoryName: null,
@@ -60,7 +60,7 @@ class CategoryPage extends Component {
                     <div className='row'>
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map((product) => (
-                                <div className='col-12 col-lg-4' key={product.id}>
+                                <div className='col-12 col-lg-4' key={product.id} data-testid={`product-${slugify(product.name)}`}>
                                     <ProductBox
                                         name={product.name}
                                         image={product.galleries[0]?.image_url || 'default-image-url'}
