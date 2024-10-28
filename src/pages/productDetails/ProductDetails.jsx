@@ -142,9 +142,9 @@ class ProductDetails extends Component {
                                 switch (attrItem.name) {
                                     case "color":
                                         content = (
-                                            <div className='productColors' key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
+                                            <div className='productColors' key={attrItem.id} >
                                                 <p>{attrItem.name}:</p>
-                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" >
+                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
                                                     {attrItem.items.map((colorItem) => (
                                                         <label
                                                             className="containerBlock colorItem"
@@ -157,6 +157,7 @@ class ProductDetails extends Component {
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
+                                                                data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${colorItem.value}`}
 
                                                             />
                                                             <span className="checkmark"></span>
@@ -179,6 +180,7 @@ class ProductDetails extends Component {
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
                                                             disabled={!product.in_stock}
+                                                            data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${item.value}`}
 
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
