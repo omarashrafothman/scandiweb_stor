@@ -157,7 +157,7 @@ class ProductDetails extends Component {
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
-                                                                data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${colorItem.display_value}`}
+                                                                data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}
                                                             />
                                                             <span className="checkmark"></span>
                                                         </label>
@@ -179,7 +179,7 @@ class ProductDetails extends Component {
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
                                                             disabled={!product.in_stock}
-                                                            data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${item.value}`}
+                                                            data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
                                                     </label>
