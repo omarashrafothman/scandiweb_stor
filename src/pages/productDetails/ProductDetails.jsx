@@ -157,6 +157,7 @@ class ProductDetails extends Component {
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
+
                                                                 data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}-${colorItem.value}`}
 
                                                             />
