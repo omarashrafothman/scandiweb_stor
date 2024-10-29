@@ -24,7 +24,6 @@ export default class Cart extends Component {
             });
         }
 
-        // Open the modal if the cart is open in the context
         if (prevProps.isCartOpen !== this.context.isCartOpen && this.context.isCartOpen) {
             const modalElement = document.getElementById("exampleModal");
             if (modalElement) {
@@ -49,50 +48,51 @@ export default class Cart extends Component {
         });
     };
 
-
     decrementQuantity = async (cartItemId) => {
         this.setState((prevState) => {
-            const updatedCart = prevState.cartElements.map((item) => {
-                if (item.id === cartItemId) {
-                    const newQuantity = item.quantity - 1;
-                    if (newQuantity >= 0) {
-                        return {
-                            ...item,
-                            quantity: newQuantity,
-                        };
+            const updatedCart = prevState.cartElements
+                .map((item) => {
+                    if (item.id === cartItemId) {
+                        const newQuantity = item.quantity - 1;
+                        if (newQuantity >= 0) {
+                            return {
+                                ...item,
+                                quantity: newQuantity,
+                            };
+                        }
                     }
-                }
-                return item;
-            }).filter(item => item.quantity > 0); // Remove items with 0 quantity
-
+                    return item;
+                })
+                .filter((item) => item.quantity > 0);
             return { cartElements: updatedCart };
         });
 
-        // Optionally remove the item from the backend
-        const cartItem = this.state.cartElements.find(item => item.id === cartItemId);
+        const cartItem = this.state.cartElements.find((item) => item.id === cartItemId);
         if (cartItem && cartItem.quantity === 1) {
             await this.removeFromCartMutation(cartItem.sku_id);
         }
     };
 
-
     removeFromCartMutation = async (sku_id) => {
         try {
-            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    query: `
+            const response = await fetch(
+                'https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: `
                   mutation {
                     removeFromCart(sku_id: ${sku_id}) {
                       id
                     }
                   }
                 `,
-                }),
-            });
+                    }),
+                }
+            );
 
             const result = await response.json();
             if (result.errors) {
@@ -103,18 +103,15 @@ export default class Cart extends Component {
         }
     };
 
-
     calculateTotalPrice = (cartItem) => {
         return cartItem.quantity * cartItem.product.prices[0].amount;
     };
 
-
     calculateTotalCartPrice = () => {
         const { cartElements } = this.state;
-        return cartElements.reduce(
-            (acc, cartItem) => acc + this.calculateTotalPrice(cartItem),
-            0
-        ).toFixed(2); // Ensure only 2 decimal points
+        return cartElements
+            .reduce((acc, cartItem) => acc + this.calculateTotalPrice(cartItem), 0)
+            .toFixed(2);
     };
 
     placeOrder = async () => {
@@ -125,26 +122,28 @@ export default class Cart extends Component {
         const cart_id = 1;
 
         try {
-            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    query: `mutation {
+            const response = await fetch(
+                'https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        query: `mutation {
                     createOrder(cart_id: ${cart_id}, total_price: ${total_price}, status: "pending") {
                         id
                     }
                 }`,
-                }),
-            });
+                    }),
+                }
+            );
 
             const result = await response.json();
             if (result.errors) {
                 console.error("Error creating order", result.errors);
                 return;
             }
-
 
             this.context.clearCart();
             this.setState({ cartElements: [] });
@@ -170,7 +169,7 @@ export default class Cart extends Component {
                     {cartElements.length <= 0 ? "" : <span className="cartCount">{cartElements.length}</span>}
                     <img src={cartImage} alt="cart icon" />
                 </button>
-                {this.context.isCartOpen && ( // Render modal conditionally based on context
+                {this.context.isCartOpen && (
                     <div className="modal fade show" style={{ display: 'block' }} data-testid="cart-overlay" data-bs-dismiss="modal">
                         <div className="modal-dialog">
                             <div className="modal-content">
@@ -179,8 +178,7 @@ export default class Cart extends Component {
                                         <h4>My Bag, </h4>
                                         <p className="m-0">{cartElements.length} {cartElements.length <= 1 ? "item" : "items"}</p>
                                     </div>
-
-                                    <div className="cartItemsContainer my-2" >
+                                    <div className="cartItemsContainer my-2">
                                         {cartElements.length > 0 ? (
                                             cartElements.map((cartItem, attrItemIndex) => (
                                                 <div className="cartItem w-100 d-flex" key={cartItem.id}>
@@ -190,8 +188,7 @@ export default class Cart extends Component {
                                                             {cartItem.product.prices[0].currency_symbol}
                                                             {this.calculateTotalPrice(cartItem).toFixed(2)}
                                                         </p>
-
-                                                        <div className="productAttr" >
+                                                        <div className="productAttr">
                                                             {cartItem.product.attributes.map((attrItem, index) => {
                                                                 let content;
                                                                 switch (attrItem.name) {
@@ -215,7 +212,6 @@ export default class Cart extends Component {
                                                                                                 data-testid={cartItem.color === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${item.display_value} cart-item-attribute-${slugify(attrItem.name)}-${item.display_value}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${item.display_value} cart-item-attribute-${slugify(attrItem.name)}-${item.display_value}`}
                                                                                             />
                                                                                             <span className="checkmark"></span>
-
                                                                                         </label>
                                                                                     ))}
                                                                                 </div>
@@ -237,14 +233,14 @@ export default class Cart extends Component {
                                                                                             name="capacity"
                                                                                             value={item.display_value}
                                                                                             checked={cartItem.capacity === item.display_value}
-                                                                                            data-testid={cartItem.capacity === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)} cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}`} />
+                                                                                            data-testid={cartItem.capacity === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)} cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}`}
+                                                                                        />
                                                                                         <span className="checkmark">{item.display_value}</span>
                                                                                     </label>
                                                                                 ))}
                                                                             </div>
                                                                         );
                                                                         break;
-
                                                                     case "size":
                                                                         content = (
                                                                             <div className="productSizes my-2" data-testid={`cart-item-attribute-${slugify(attrItem.name)}`} key={index}>
@@ -259,92 +255,58 @@ export default class Cart extends Component {
                                                                                             type="radio"
                                                                                             name={`product[${attrItemIndex}]["size"]`}
                                                                                             value={item.display_value}
-                                                                                            checked={cartItem.size === item.value}
-                                                                                            data-testid={cartItem.size === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${item.value} cart-item-attribute-${slugify(attrItem.name)}-${item.value}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${item.value}`} />
+                                                                                            checked={cartItem.size === item.display_value}
+                                                                                            data-testid={cartItem.size === item.value ? `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)} cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}-selected` : `cart-item-attribute-${slugify(attrItem.name)}-${slugify(item.display_value)}`}
+                                                                                        />
                                                                                         <span className="checkmark">{item.display_value}</span>
                                                                                     </label>
                                                                                 ))}
                                                                             </div>
                                                                         );
                                                                         break;
-
-
                                                                     default:
                                                                         content = null;
-                                                                        break;
                                                                 }
                                                                 return content;
                                                             })}
                                                         </div>
                                                     </div>
-
-                                                    <div className="w-50 d-flex justify-content-between align-items-center">
-                                                        <div className="d-flex align-items-center justify-content-between flex-column cartItemquantity">
+                                                    <div className="w-50 d-flex flex-column align-items-center">
+                                                        <div className="d-flex flex-column align-items-center justify-content-center h-100 my-3">
                                                             <button
-                                                                data-testid='cart-item-amount-increase'
-                                                                className="d-flex align-items-center justify-content-center"
+                                                                className="rounded border-0 bg-transparent py-2 px-3"
                                                                 onClick={() => this.incrementQuantity(cartItem.id)}
+                                                                data-testid="cart-item-increment-quantity-btn"
                                                             >
                                                                 +
                                                             </button>
-                                                            <span>{cartItem.quantity}</span>
+                                                            <p className="m-0 py-2 cartCount">{cartItem.quantity}</p>
                                                             <button
-                                                                data-testid='cart-item-amount-decrease'
-                                                                className="d-flex align-items-center justify-content-center"
+                                                                className="rounded border-0 bg-transparent py-2 px-3"
                                                                 onClick={() => this.decrementQuantity(cartItem.id)}
+                                                                data-testid="cart-item-decrement-quantity-btn"
                                                             >
                                                                 -
                                                             </button>
-                                                        </div>
-
-                                                        <div className="itemImage">
-                                                            <img
-                                                                src={cartItem.product.galleries[0].image_url}
-                                                                alt="product image"
-                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
                                             ))
                                         ) : (
-                                            <p>Your cart is empty.</p>
+                                            <p className="emptyCart mt-3">Your Cart is Empty</p>
                                         )}
-
                                     </div>
-                                    {cartElements.length > 0 && (
-                                        <div className="totalPrice d-flex align-items-center justify-content-between">
-                                            <p className="m-0">Total</p>
-                                            <p className="m-0" data-testid='cart-total'>
-                                                {cartElements[0]?.product.prices[0]?.currency_symbol}
-                                                {this.calculateTotalCartPrice()}
-                                            </p>
-                                        </div>
-                                    )}
-
-                                    {cartElements.length > 0 && (
-                                        <div className="placeOrder">
-                                            <div className="my-4">
-                                                <button className="cartBtn" onClick={this.placeOrder}>PLACE ORDER</button>
-                                            </div>
-                                        </div>
-                                    )}
-
+                                    <div className="cartTotalContainer d-flex align-items-center justify-content-between">
+                                        <h5>Total</h5>
+                                        <p data-testid="total-price">{this.calculateTotalCartPrice()}</p>
+                                    </div>
+                                    <button className="primaryBtn w-100 mt-3" data-testid="place-order-btn" onClick={this.placeOrder}>Place Order</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 )}
             </div>
         );
     }
-
 }
-
-
-
-
-
-
-
