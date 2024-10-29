@@ -64,7 +64,7 @@ class Header extends Component {
                                         >
                                             <a
                                                 className="nav-link"
-                                                href="all"
+                                                href="/all"
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
                                                 data-testid={selectedParam === "all" ? 'active-category-link category-link' : 'category-link'}
 
@@ -79,7 +79,7 @@ class Header extends Component {
                                         >
                                             <a
                                                 className="nav-link"
-                                                href={"/clothes"}
+                                                href="/clothes"
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
                                                 data-testid={selectedParam === "clothes" ? 'active-category-link category-link' : 'category-link'}
 
@@ -93,7 +93,7 @@ class Header extends Component {
                                         >
                                             <a
                                                 className="nav-link"
-                                                href={"/tech"}
+                                                href="/tech"
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
                                                 data-testid={selectedParam === "tech" ? 'active-category-link category-link' : 'category-link'}
 
