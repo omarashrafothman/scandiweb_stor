@@ -66,7 +66,8 @@ class Header extends Component {
                                                     className="nav-link"
                                                     href={"/" + category.name}
                                                     onClick={this.handleLinkClick(category, setSelectedParam)}
-                                                    data-testid={selectedParam === category.name ? "active-category-link" : "category-link"}
+                                                    data-testid={selectedParam === category.name ? "active-category-link category-link" : "category-link"}
+
                                                 >
                                                     {category.name}
                                                 </a>
