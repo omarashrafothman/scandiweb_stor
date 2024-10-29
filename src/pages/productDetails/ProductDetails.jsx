@@ -149,6 +149,7 @@ class ProductDetails extends Component {
                                                 <div className="d-flex align-items-center w-75 sizesContainer my-2">
                                                     {attrItem.items.map((colorItem) => (
                                                         <label
+                                                            data-testid={`product-attribute-${slugify(attrItem.name)}-${colorItem.display_value}`}
                                                             className="containerBlock colorItem"
                                                             style={{ background: colorItem.value }}
                                                             key={colorItem.id}
@@ -159,6 +160,7 @@ class ProductDetails extends Component {
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
+
                                                             />
                                                             <span className="checkmark"></span>
                                                         </label>
@@ -173,13 +175,16 @@ class ProductDetails extends Component {
                                             <div className="productSizes my-2" key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
                                                 <p>{attrItem.name}:</p>
                                                 {attrItem.items.map((item) => (
-                                                    <label className="containerBlock my-1" key={item.id}>
+                                                    <label className="containerBlock my-1" key={item.id}
+
+                                                        data-testid={`product-attribute-${slugify(attrItem.name)}-${item.display_value}`}>
                                                         <input
                                                             type="radio"
                                                             name={attrItem.name}
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
                                                             disabled={!product.in_stock}
+
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
                                                     </label>
@@ -214,7 +219,7 @@ class ProductDetails extends Component {
                                 </button>
                             </div>
 
-                            <div className='productDet' data-testid='product-description'>
+                            <div className='productDet' data-testid="product-description">
                                 {product.description}
                             </div>
                         </div>
