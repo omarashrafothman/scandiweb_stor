@@ -13,7 +13,7 @@ export class CartProvider extends Component {
 
     fetchCart = async () => {
         try {
-            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export class CartProvider extends Component {
             }
         `;
         try {
-            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,8 +54,8 @@ export class CartProvider extends Component {
             if (result.errors) {
                 console.error('Error adding item to cart:', result.errors);
             } else {
-                this.setState({ isCartOpen: true }); // Open the cart when a product is added
-                this.fetchCart(); // Fetch the updated cart
+                this.setState({ isCartOpen: true });
+                this.fetchCart();
             }
         } catch (err) {
             console.error('Failed to add item to cart:', err);
@@ -64,7 +64,7 @@ export class CartProvider extends Component {
 
     clearCart = async () => {
         try {
-            const response = await fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

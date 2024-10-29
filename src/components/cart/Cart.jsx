@@ -75,23 +75,21 @@ export default class Cart extends Component {
 
     removeFromCartMutation = async (sku_id) => {
         try {
-            const response = await fetch(
-                'https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        query: `
+            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    query: `
                   mutation {
                     removeFromCart(sku_id: ${sku_id}) {
                       id
                     }
                   }
                 `,
-                    }),
-                }
+                }),
+            }
             );
 
             const result = await response.json();
@@ -123,7 +121,7 @@ export default class Cart extends Component {
 
         try {
             const response = await fetch(
-                'https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/',
+                'https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/',
                 {
                     method: 'POST',
                     headers: {
@@ -169,7 +167,7 @@ export default class Cart extends Component {
                     {cartElements.length <= 0 ? "" : <span className="cartCount">{cartElements.length}</span>}
                     <img src={cartImage} alt="cart icon" />
                 </button>
-                {this.context.isCartOpen && (
+                {this.context.isCartOpen && ( // Render modal conditionally based on context
                     <div className="modal fade show" style={{ display: 'block' }} data-testid="cart-overlay" data-bs-dismiss="modal">
                         <div className="modal-dialog">
                             <div className="modal-content">

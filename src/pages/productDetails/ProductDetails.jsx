@@ -59,7 +59,7 @@ class ProductDetails extends Component {
         }
        ` ;
 
-            fetch('https://4733-197-60-28-143.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
