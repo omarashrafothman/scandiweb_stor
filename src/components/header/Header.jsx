@@ -67,7 +67,7 @@ class Header extends Component {
                                         <a
                                             className="nav-link"
                                             href={"/" + category.name}
-                                            data-testid={params === category.name ? 'category-link active-category-link' : 'category-link'}
+                                            data-testid={params === category.name ? 'active-category-link' : 'category-link'}
                                         >
                                             {category.name}
                                         </a>
