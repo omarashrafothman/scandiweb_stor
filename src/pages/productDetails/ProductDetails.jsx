@@ -149,7 +149,7 @@ class ProductDetails extends Component {
                                                 <div className="d-flex align-items-center w-75 sizesContainer my-2">
                                                     {attrItem.items.map((colorItem) => (
                                                         <label
-                                                            data-testid={`product-attribute-${slugify(attrItem.name)}-${colorItem.display_value}`}
+
                                                             className="containerBlock colorItem"
                                                             style={{ background: colorItem.value }}
                                                             key={colorItem.id}
@@ -160,6 +160,7 @@ class ProductDetails extends Component {
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
+                                                                data-testid={`product-attribute-${slugify(attrItem.name)}-${colorItem.display_value}`}
 
                                                             />
                                                             <span className="checkmark"></span>
@@ -177,13 +178,14 @@ class ProductDetails extends Component {
                                                 {attrItem.items.map((item) => (
                                                     <label className="containerBlock my-1" key={item.id}
 
-                                                        data-testid={`product-attribute-${slugify(attrItem.name)}-${item.display_value}`}>
+                                                    >
                                                         <input
                                                             type="radio"
                                                             name={attrItem.name}
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
                                                             disabled={!product.in_stock}
+                                                            data-testid={`product-attribute-${slugify(attrItem.name)}-${item.display_value}`}
 
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
