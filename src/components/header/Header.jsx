@@ -4,6 +4,7 @@ import Cart from '../cart/Cart';
 
 import { CartContext } from '../../context/CartContext.js';
 import { GET_CATEGORIES } from "../../graphql/queries.js";
+import { Link } from 'react-router-dom';
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -52,32 +53,34 @@ class Header extends Component {
         const { items, params } = this.props;
         if (loading) return <p>Loading categories...</p>;
         if (error) return <p>Error: {error}</p>;
-
         return (
             <header>
                 <nav className="navbar navbar-expand-lg ">
                     <div className="container">
                         <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                             <ul className="m-0 d-flex align-items-center pt-3">
+
+
                                 {categories.map((category) => (
+
                                     <li
                                         className={params === category.name ? "nav-item active" : "nav-item"}
                                         key={category.name}
                                     >
-                                        <a
+                                        <Link
                                             className="nav-link"
-                                            href={"/" + category.name}
+                                            to={"/" + category.name}
                                             data-testid={params === category.name ? 'active-category-link' : 'category-link'}
                                         >
                                             {category.name}
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>
                             <div>
-                                <a className="navbar-brand" href="/">
+                                <Link className="navbar-brand" to="/">
                                     <img src={logo} alt='logo' />
-                                </a>
+                                </Link>
                             </div>
                             <div className='shoppingCart' >
                                 <Cart cartElements={cart} />
