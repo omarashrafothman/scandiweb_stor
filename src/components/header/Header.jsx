@@ -4,7 +4,7 @@ import Cart from '../cart/Cart';
 
 import { CartContext } from '../../context/CartContext.js';
 import { GET_CATEGORIES } from "../../graphql/queries.js";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -66,14 +66,14 @@ class Header extends Component {
                                     <li
                                         className={params === category.name ? "nav-item active" : "nav-item"}
                                         key={category.name}
+                                        data-testid={params === category.name ? 'active-category-link' : 'category-link'}
                                     >
-                                        <Link
+                                        <a
                                             className="nav-link"
-                                            to={"/" + category.name}
-                                            data-testid={params === category.name ? 'active-category-link' : 'category-link'}
+                                            href={"/" + category.name}
                                         >
                                             {category.name}
-                                        </Link>
+                                        </a>
                                     </li>
                                 ))}
                             </ul>
