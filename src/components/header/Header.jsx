@@ -79,7 +79,7 @@ class Header extends Component {
                                     <img src={logo} alt='logo' />
                                 </a>
                             </div>
-                            <div className='shoppingCart' >
+                            <div className='shoppingCart' data-testid="cart-btn">
                                 <Cart cartElements={cart} />
                             </div>
                         </div>

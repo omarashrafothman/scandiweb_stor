@@ -134,7 +134,7 @@ export default class Cart extends Component {
         return (
             <div>
                 <button
-                    data-testid="cart-btn"
+
                     type="button"
                     className="btn position-relative"
                     onClick={() => this.context.toggleCart(true)}
