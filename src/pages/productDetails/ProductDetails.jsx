@@ -144,9 +144,9 @@ class ProductDetails extends Component {
                                 switch (attrItem.name) {
                                     case "color":
                                         content = (
-                                            <div className='productColors' key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
+                                            <div className='productColors' key={attrItem.id} >
                                                 <p>{attrItem.name}:</p>
-                                                <div className="d-flex align-items-center w-75 sizesContainer my-2">
+                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
                                                     {attrItem.items.map((colorItem) => (
                                                         <label
 
@@ -160,7 +160,7 @@ class ProductDetails extends Component {
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
-                                                                data-testid={`product-attribute-${slugify(attrItem.name)}-${colorItem.display_value}`}
+                                                                data-testid={`product-attribute-${slugify(attrItem.name)}-${colorItem.value}`}
 
                                                             />
                                                             <span className="checkmark"></span>
