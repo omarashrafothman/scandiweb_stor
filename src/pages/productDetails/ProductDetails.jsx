@@ -138,15 +138,17 @@ class ProductDetails extends Component {
                         <div className='productDetailsContent'>
                             <h3>{product.name}</h3>
 
+
                             {product.attributes.map((attrItem) => {
-                                // const testId = product-attribute-${slugify(attrItem.name.toLowerCase())};
+                                const testId = `product-attribute-${slugify(attrItem.name.toLowerCase())}`;
+                                console.log(attrItem.name)
                                 let content;
                                 switch (attrItem.name) {
                                     case "color":
                                         content = (
                                             <div className='productColors' key={attrItem.id} >
                                                 <p>{attrItem.name}:</p>
-                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
+                                                <div className="d-flex align-items-center w-75 sizesContainer my-2" data-testid={testId}>
                                                     {attrItem.items.map((colorItem) => (
                                                         <label
 
@@ -160,7 +162,7 @@ class ProductDetails extends Component {
                                                                 value={colorItem.value}
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
-                                                                data-testid={`product-attribute-${slugify(attrItem.name)}-${colorItem.value}`}
+                                                                data-testid={`${testId}-${colorItem.value}`}
 
                                                             />
                                                             <span className="checkmark"></span>
@@ -173,7 +175,7 @@ class ProductDetails extends Component {
 
                                     default:
                                         content = (
-                                            <div className="productSizes my-2" key={attrItem.id} data-testid={`product-attribute-${slugify(attrItem.name.toLowerCase())}`}>
+                                            <div className="productSizes my-2" key={attrItem.id} data-testid={testId}>
                                                 <p>{attrItem.name}:</p>
                                                 {attrItem.items.map((item) => (
                                                     <label className="containerBlock my-1" key={item.id}
@@ -185,7 +187,7 @@ class ProductDetails extends Component {
                                                             value={item.value}
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
                                                             disabled={!product.in_stock}
-                                                            data-testid={`product-attribute-${slugify(attrItem.name)}-${item.display_value}`}
+                                                            data-testid={`${testId}-${item.value}`}
 
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
