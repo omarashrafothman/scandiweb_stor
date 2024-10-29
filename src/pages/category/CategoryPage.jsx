@@ -2,26 +2,35 @@ import React, { Component } from 'react';
 import ProductBox from '../../components/product/ProductBox';
 import { GET_ALL_PRODUCT_WITH_CATEGORIES } from '../../graphql/queries.js';
 import slugify from 'react-slugify';
+import { NavigationContext } from '../../context/NavigationProvider.js';
+
 class CategoryPage extends Component {
+    static contextType = NavigationContext;
+
     state = {
-        categoryName: null,
         products: [],
         loading: true,
         error: null,
     };
 
     componentDidMount() {
-        const categoryName = window.location.pathname.split('/')[1];
-        this.setState({ categoryName }, this.fetchProducts);
+        const { selectedParam } = this.context;
+        this.setState({ categoryName: selectedParam }, this.fetchProducts);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { selectedParam } = this.context;
+
+        if (prevState.categoryName !== selectedParam) {
+            this.setState({ categoryName: selectedParam }, this.fetchProducts);
+        }
     }
 
     fetchProducts = async () => {
         try {
             const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: GET_ALL_PRODUCT_WITH_CATEGORIES }),
             });
 
@@ -40,14 +49,10 @@ class CategoryPage extends Component {
     render() {
         const { categoryName, products, loading, error } = this.state;
 
-        if (loading) {
-            return <p>Loading...</p>;
-        }
+        if (loading) return <p>Loading...</p>;
+        if (error) return <p>Error: {error}</p>;
 
-        if (error) {
-            return <p>Error: {error}</p>;
-        }
-
+        // تصفية المنتجات حسب الفئة المحددة
         let filteredProducts = categoryName === 'all'
             ? products
             : products.filter(product => product.category.name === categoryName);

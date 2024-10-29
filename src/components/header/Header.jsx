@@ -1,94 +1,92 @@
 import React, { Component } from 'react';
 import logo from "../../assets/images/logo.png";
 import Cart from '../cart/Cart';
-
 import { CartContext } from '../../context/CartContext.js';
+import { NavigationContext } from '../../context/NavigationProvider.js';
 import { GET_CATEGORIES } from "../../graphql/queries.js";
-import { Link, NavLink } from 'react-router-dom';
+
 class Header extends Component {
+    static contextType = CartContext;
+
     constructor(props) {
         super(props);
-        this.state = {
-            categories: [],
-
-        };
+        this.state = { categories: [], error: null };
     }
-    static contextType = CartContext;
+
     componentDidMount() {
         this.context.fetchCart();
         this.fetchCategories();
     }
 
-
     fetchCategories = async () => {
         try {
-
             const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: GET_CATEGORIES }),
             });
-
             const result = await response.json();
-
             if (result.errors) {
-                this.setState({ error: result.errors[0].message, loading: false });
+                this.setState({ error: result.errors[0].message });
             } else {
-                this.setState({ categories: result.data.categories, loading: false });
+                this.setState({ categories: result.data.categories });
             }
         } catch (err) {
-            this.setState({ error: 'Failed to fetch categories', loading: false });
+            this.setState({ error: 'Failed to fetch categories' });
         }
     };
 
-
+    handleLinkClick = (category, setSelectedParam) => (event) => {
+        event.preventDefault();
+        const newPath = `/${category.name}`;
+        window.history.pushState({}, "", newPath);
+        setSelectedParam(category.name);
+    };
 
     render() {
-        const { categories, loading, error } = this.state;
+        const { categories, error } = this.state;
         const { cart } = this.context;
 
-
-        const { items, params } = this.props;
-        if (loading) return <p>Loading categories...</p>;
         if (error) return <p>Error: {error}</p>;
+
         return (
-            <header>
-                <nav className="navbar navbar-expand-lg ">
-                    <div className="container">
-                        <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
-                            <ul className="m-0 d-flex align-items-center pt-3">
-
-
-                                {categories.map((category) => (
-
-                                    <li
-                                        className={params === category.name ? "nav-item active" : "nav-item"}
-                                        key={category.name}
-                                        data-testid={params === category.name ? 'active-category-link' : 'category-link'}
-                                    >
-                                        <a
-                                            className="nav-link"
-                                            href={"/" + category.name}
-                                        >
-                                            {category.name}
+            <NavigationContext.Consumer>
+                {({ selectedParam, setSelectedParam }) => (
+                    <header>
+                        <nav className="navbar navbar-expand-lg">
+                            <div className="container">
+                                <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+                                    <ul className="m-0 d-flex align-items-center pt-3">
+                                        {categories.map((category) => (
+                                            <li
+                                                className={selectedParam === category.name ? "nav-item active" : "nav-item"}
+                                                key={category.name}
+                                            >
+                                                <a
+                                                    className="nav-link"
+                                                    href={"/" + category.name}
+                                                    onClick={this.handleLinkClick(category, setSelectedParam)}
+                                                    data-testid={selectedParam === category.name ? "active-category-link" : "category-link"}
+                                                >
+                                                    {category.name}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div>
+                                        <a className="navbar-brand" href="/">
+                                            <img src={logo} alt="logo" />
                                         </a>
-                                    </li>
-                                ))}
-                            </ul>
-                            <div>
-                                <Link className="navbar-brand" to="/">
-                                    <img src={logo} alt='logo' />
-                                </Link>
+                                    </div>
+                                    <div className="shoppingCart">
+                                        <Cart cartElements={cart} />
+                                    </div>
+                                </div>
                             </div>
-                            <div className='shoppingCart' >
-                                <Cart cartElements={cart} />
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </header>
+                        </nav>
+                    </header>
+                )}
+            </NavigationContext.Consumer>
         );
     }
 }

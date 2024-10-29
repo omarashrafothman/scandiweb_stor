@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../components/header/Header';
+import { NavigationProvider } from '../context/NavigationProvider';
 
 export default class MainLayout extends Component {
 
@@ -11,9 +12,10 @@ export default class MainLayout extends Component {
 
         return (
             <>
-
-                <Header params={params} />
-                <Outlet />
+                <NavigationProvider>
+                    <Header params={params} />
+                    <Outlet />
+                </NavigationProvider>
             </>
         )
     }

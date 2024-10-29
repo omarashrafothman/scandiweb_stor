@@ -1,12 +1,10 @@
-
 import React, { Component } from 'react';
 import ImageSlider from '../../components/slider/ImageSlider';
 import { htmlToText } from 'html-to-text';
 import { CartContext } from '../../context/CartContext';
 import slugify from 'react-slugify';
-
+import { NavigationContext } from '../../context/NavigationProvider.js';
 class ProductDetails extends Component {
-
     static contextType = CartContext;
 
     constructor(props) {
@@ -22,7 +20,15 @@ class ProductDetails extends Component {
 
     componentDidMount() {
         this.fetchProductDetails();
+        this.updateUrl(); // Update the URL when the component mounts
     }
+
+    updateUrl = () => {
+        const { sku_id } = this.state;
+        if (sku_id) {
+            window.history.pushState(null, '', `/product/${sku_id}`); // Update the URL
+        }
+    };
 
     handleAddToCart = (skuId, color, size, capacity) => {
         this.context.addToCart(skuId, color, size, capacity);
@@ -56,8 +62,8 @@ class ProductDetails extends Component {
                             }
                         }
                     }
-        }
-       ` ;
+                }
+            `;
 
             fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
                 method: 'POST',
@@ -101,16 +107,11 @@ class ProductDetails extends Component {
     };
 
     render() {
-
         const { product, loading, error, selectedAttributes } = this.state;
 
         const capacity = selectedAttributes['capacity'] || null;
         const color = selectedAttributes['color'] || null;
         const size = selectedAttributes['size'] || null;
-
-
-
-
 
         if (loading) return <p>Loading...</p>;
 
@@ -123,35 +124,32 @@ class ProductDetails extends Component {
             );
         }
 
-
         const addToCartDisabled = (product.attributes.some(attr => attr.name === 'capacity') && !capacity) ||
             (product.attributes.some(attr => attr.name === 'color') && !color) ||
             (product.attributes.some(attr => attr.name === 'size') && !size);
 
         return (
+
             <div>
                 <div className='container'>
                     <div className='productDetails d-flex justify-content-around flex-wrap my-5'>
-                        <div className='productDetailsGallery' >
+                        <div className='productDetailsGallery'>
                             <ImageSlider images={product.galleries} />
                         </div>
                         <div className='productDetailsContent'>
                             <h3>{product.name}</h3>
 
-
                             {product.attributes.map((attrItem) => {
                                 const testId = `product-attribute-${slugify(attrItem.name.toLowerCase())}`;
-                                console.log(attrItem.name)
                                 let content;
                                 switch (attrItem.name) {
                                     case "color":
                                         content = (
-                                            <div className='productColors' key={attrItem.id} >
+                                            <div className='productColors' key={attrItem.id}>
                                                 <p>{attrItem.name}:</p>
                                                 <div className="d-flex align-items-center w-75 sizesContainer my-2" data-testid={testId}>
                                                     {attrItem.items.map((colorItem) => (
                                                         <label
-
                                                             className="containerBlock colorItem"
                                                             style={{ background: colorItem.value }}
                                                             key={colorItem.id}
@@ -163,7 +161,6 @@ class ProductDetails extends Component {
                                                                 onChange={() => this.handleAttributeChange(attrItem.name, colorItem.value)}
                                                                 disabled={!product.in_stock}
                                                                 data-testid={`${testId}-${colorItem.value}`}
-
                                                             />
                                                             <span className="checkmark"></span>
                                                         </label>
@@ -178,9 +175,7 @@ class ProductDetails extends Component {
                                             <div className="productSizes my-2" key={attrItem.id} data-testid={testId}>
                                                 <p>{attrItem.name}:</p>
                                                 {attrItem.items.map((item) => (
-                                                    <label className="containerBlock my-1" key={item.id}
-
-                                                    >
+                                                    <label className="containerBlock my-1" key={item.id}>
                                                         <input
                                                             type="radio"
                                                             name={attrItem.name}
@@ -188,17 +183,14 @@ class ProductDetails extends Component {
                                                             onChange={() => this.handleAttributeChange(attrItem.name, item.value)}
                                                             disabled={!product.in_stock}
                                                             data-testid={`${testId}-${item.value}`}
-
                                                         />
                                                         <span className="checkmark">{item.display_value}</span>
                                                     </label>
-
                                                 ))}
                                             </div>
                                         );
                                         break;
                                 }
-
                                 return content;
                             })}
 
@@ -210,8 +202,6 @@ class ProductDetails extends Component {
                             </div>
 
                             <div className='my-4'>
-
-
                                 <button
                                     className='cartBtn'
                                     type='submit'
@@ -230,6 +220,7 @@ class ProductDetails extends Component {
                     </div>
                 </div>
             </div>
+
         );
     }
 }
