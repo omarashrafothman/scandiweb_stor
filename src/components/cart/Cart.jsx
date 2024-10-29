@@ -146,7 +146,7 @@ export default class Cart extends Component {
                 {isCartOpen && (
                     <div
                         className="modal fade show"
-                        testid="cart-overlay"
+                        data-testid="cart-overlay"
                         id="exampleModal"
                         tabIndex="-1"
                         style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}
@@ -311,7 +311,8 @@ export default class Cart extends Component {
                             </div>
                         </div>
                     </div>
-                )}
+                )
+                }
             </div>
         );
     }
