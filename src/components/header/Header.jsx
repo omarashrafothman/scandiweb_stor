@@ -18,23 +18,23 @@ class Header extends Component {
         this.fetchCategories();
     }
 
-    fetchCategories = async () => {
-        try {
-            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ query: GET_CATEGORIES }),
-            });
-            const result = await response.json();
-            if (result.errors) {
-                this.setState({ error: result.errors[0].message });
-            } else {
-                this.setState({ categories: result.data.categories });
-            }
-        } catch (err) {
-            this.setState({ error: 'Failed to fetch categories' });
-        }
-    };
+    // fetchCategories = async () => {
+    //     try {
+    //         const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({ query: GET_CATEGORIES }),
+    //         });
+    //         const result = await response.json();
+    //         if (result.errors) {
+    //             this.setState({ error: result.errors[0].message });
+    //         } else {
+    //             this.setState({ categories: result.data.categories });
+    //         }
+    //     } catch (err) {
+    //         this.setState({ error: 'Failed to fetch categories' });
+    //     }
+    // };
 
     handleLinkClick = (category, setSelectedParam) => (event) => {
         event.preventDefault();
@@ -65,7 +65,7 @@ class Header extends Component {
                                                 className="nav-link"
                                                 href="/all"
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
-                                                data-testid={selectedParam === "/all" ? 'active-category-link' : 'category-link'}
+                                                data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
                                             >
                                                 all
                                             </a>
@@ -76,7 +76,7 @@ class Header extends Component {
                                                 className="nav-link"
                                                 href="/clothes"
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
-                                                data-testid={selectedParam === "/clothes" ? 'active-category-link' : 'category-link'}
+                                                data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}
                                             >
                                                 clothes
                                             </a>
@@ -87,7 +87,7 @@ class Header extends Component {
                                                 className="nav-link"
                                                 href="/tech"
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
-                                                data-testid={selectedParam === "/tech" ? 'active-category-link' : 'category-link'}
+                                                data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}
                                             >
                                                 tech
                                             </a>
