@@ -43,6 +43,8 @@ class Header extends Component {
         setSelectedParam(category);
     };
 
+
+
     render() {
         const { categories, error } = this.state;
         const { cart } = this.context;
@@ -58,34 +60,34 @@ class Header extends Component {
                                 <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                                     <ul className="m-0 d-flex align-items-center pt-3">
 
-                                        <li className={selectedParam === "all" ? "nav-item active" : "nav-item"}>
+                                        <li className={selectedParam === "all" ? "nav-item active" : "nav-item"} data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}>
                                             <a
                                                 className="nav-link"
                                                 href="/all"
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
-                                                data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
+
                                             >
                                                 all
                                             </a>
                                         </li>
 
-                                        <li className={selectedParam === "clothes" ? "nav-item active" : "nav-item"}>
+                                        <li className={selectedParam === "clothes" ? "nav-item active" : "nav-item"} data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}>
                                             <a
                                                 className="nav-link"
                                                 href="/clothes"
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
-                                                data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}
+
                                             >
                                                 clothes
                                             </a>
                                         </li>
 
-                                        <li className={selectedParam === "tech" ? "nav-item active" : "nav-item"}>
+                                        <li className={selectedParam === "tech" ? "nav-item active" : "nav-item"} data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}>
                                             <a
                                                 className="nav-link"
                                                 href="/tech"
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
-                                                data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}
+
                                             >
                                                 tech
                                             </a>
