@@ -18,23 +18,23 @@ class Header extends Component {
         this.fetchCategories();
     }
 
-    // fetchCategories = async () => {
-    //     try {
-    //         const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify({ query: GET_CATEGORIES }),
-    //         });
-    //         const result = await response.json();
-    //         if (result.errors) {
-    //             this.setState({ error: result.errors[0].message });
-    //         } else {
-    //             this.setState({ categories: result.data.categories });
-    //         }
-    //     } catch (err) {
-    //         this.setState({ error: 'Failed to fetch categories' });
-    //     }
-    // };
+    fetchCategories = async () => {
+        try {
+            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: GET_CATEGORIES }),
+            });
+            const result = await response.json();
+            if (result.errors) {
+                this.setState({ error: result.errors[0].message });
+            } else {
+                this.setState({ categories: result.data.categories });
+            }
+        } catch (err) {
+            this.setState({ error: 'Failed to fetch categories' });
+        }
+    };
 
     handleLinkClick = (category, setSelectedParam) => (event) => {
         event.preventDefault();
