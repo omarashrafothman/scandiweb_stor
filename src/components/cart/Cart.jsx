@@ -145,12 +145,12 @@ export default class Cart extends Component {
 
                 {isCartOpen && (
                     <div
-                        className="modal fade show"
+                        className={isCartOpen ? "modal fade show" : "modal fade"}
                         data-testid="cart-overlay"
                         id="exampleModal"
                         tabIndex="-1"
                         style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}
-                        aria-modal="true"
+
                         role="dialog"
                     >
                         <div className="modal-dialog">

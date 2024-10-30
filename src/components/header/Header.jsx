@@ -119,7 +119,7 @@ class Header extends Component {
                                             <img src={logo} alt="logo" />
                                         </a>
                                     </div>
-                                    <div className="shoppingCart" data-testid="cart-overlay">
+                                    <div className="shoppingCart" >
                                         <Cart cartElements={cart} />
                                     </div>
                                 </div>
