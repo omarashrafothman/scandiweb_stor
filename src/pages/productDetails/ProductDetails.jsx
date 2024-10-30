@@ -3,7 +3,8 @@ import ImageSlider from '../../components/slider/ImageSlider';
 import { htmlToText } from 'html-to-text';
 import { CartContext } from '../../context/CartContext';
 import slugify from 'react-slugify';
-import { NavigationContext } from '../../context/NavigationProvider.js';
+
+import { API_BASE_URL } from "../../variables.js";
 class ProductDetails extends Component {
     static contextType = CartContext;
 
@@ -65,7 +66,7 @@ class ProductDetails extends Component {
                 }
             `;
 
-            fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            fetch(API_BASE_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +109,7 @@ class ProductDetails extends Component {
 
     render() {
         const { product, loading, error, selectedAttributes } = this.state;
-
+        console.log(API_BASE_URL)
         const capacity = selectedAttributes['capacity'] || null;
         const color = selectedAttributes['color'] || null;
         const size = selectedAttributes['size'] || null;

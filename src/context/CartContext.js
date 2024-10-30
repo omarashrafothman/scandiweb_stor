@@ -1,6 +1,6 @@
 import React, { createContext, Component } from 'react';
 import { GET_CART, CLEAR_CART_MUTATION } from "../graphql/queries";
-
+import { API_BASE_URL } from "../variables"
 export const CartContext = createContext();
 
 export class CartProvider extends Component {
@@ -13,7 +13,7 @@ export class CartProvider extends Component {
 
     fetchCart = async () => {
         try {
-            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch(API_BASE_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export class CartProvider extends Component {
             }
         `;
         try {
-            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch(API_BASE_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export class CartProvider extends Component {
 
     clearCart = async () => {
         try {
-            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch(API_BASE_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

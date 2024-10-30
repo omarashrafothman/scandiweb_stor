@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import cartImage from "../../assets/images/shopping-cart.png";
 import { CartContext } from '../../context/CartContext.js';
 import slugify from 'react-slugify';
-
+import { API_BASE_URL } from "../../variables.js";
 export default class Cart extends Component {
     static contextType = CartContext;
 
@@ -66,7 +66,7 @@ export default class Cart extends Component {
 
     removeFromCartMutation = async (sku_id) => {
         try {
-            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch(API_BASE_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -102,7 +102,7 @@ export default class Cart extends Component {
         const cart_id = 1;
 
         try {
-            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch(API_BASE_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -25,7 +25,6 @@ export class NavigationProvider extends Component {
     };
 
     componentDidMount() {
-        // تحديث عند التحميل
         window.onpopstate = () => {
             this.setState({ selectedParam: this.getSelectedParam() });
         };

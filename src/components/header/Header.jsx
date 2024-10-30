@@ -4,6 +4,7 @@ import Cart from '../cart/Cart';
 import { CartContext } from '../../context/CartContext.js';
 import { NavigationContext } from '../../context/NavigationProvider.js';
 import { GET_CATEGORIES } from "../../graphql/queries.js";
+import { API_BASE_URL } from "../../variables.js"
 
 class Header extends Component {
     static contextType = CartContext;
@@ -20,7 +21,7 @@ class Header extends Component {
 
     fetchCategories = async () => {
         try {
-            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch(API_BASE_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: GET_CATEGORIES }),

@@ -3,7 +3,7 @@ import ProductBox from '../../components/product/ProductBox';
 import { GET_ALL_PRODUCT_WITH_CATEGORIES } from '../../graphql/queries.js';
 import slugify from 'react-slugify';
 import { NavigationContext } from '../../context/NavigationProvider.js';
-
+import { API_BASE_URL } from "../../variables.js"
 class CategoryPage extends Component {
     static contextType = NavigationContext;
 
@@ -27,8 +27,9 @@ class CategoryPage extends Component {
     }
 
     fetchProducts = async () => {
+
         try {
-            const response = await fetch('https://5d46-197-60-156-211.ngrok-free.app/php_projects/scandiweb_store/backend/', {
+            const response = await fetch(API_BASE_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: GET_ALL_PRODUCT_WITH_CATEGORIES }),
@@ -52,7 +53,6 @@ class CategoryPage extends Component {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error: {error}</p>;
 
-        // تصفية المنتجات حسب الفئة المحددة
         let filteredProducts = categoryName === 'all'
             ? products
             : products.filter(product => product.category.name === categoryName);
