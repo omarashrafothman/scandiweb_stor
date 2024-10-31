@@ -166,7 +166,7 @@ export default class Cart extends Component {
                                 <div className="modal-body" id='modalBody' onClick={this.handleParentClose}>
                                     <div className="cartHeading d-flex align-items-center">
                                         <h4>My Bag,</h4>
-                                        <p className="m-0">{cartElements.length} {cartElements.length <= 1 ? "item" : "items"}</p>
+                                        <p className="m-0">{cartElements.length} {cartElements.length <= 1 ? "Item" : "Items"}</p>
                                     </div>
 
                                     <div className="cartItemsContainer my-2">
