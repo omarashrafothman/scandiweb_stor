@@ -146,7 +146,7 @@ export default class Cart extends Component {
                 {isCartOpen && (
                     <div
                         data-testid="cart-overlay"
-                        className={isCartOpen ? "modal fade show" : "modal fade"}
+                        className={isCartOpen ? "modal fade show " : "modal fade "}
 
                         id="exampleModal"
                         tabIndex="-1"
