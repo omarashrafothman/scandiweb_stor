@@ -8,7 +8,7 @@ export class CartProvider extends Component {
         cart: [],
         loading: true,
         error: null,
-        isCartOpen: false, // New state variable to track cart visibility
+        isCartOpen: false,
     };
 
     fetchCart = async () => {

@@ -141,18 +141,11 @@ export default class Cart extends Component {
 
         return (
             <div>
-                <button
-                    data-testid="cart-btn"
-                    type="button"
-                    className="btn position-relative"
-                    onClick={() => this.context.toggleCart(true)}
-                >
-                    {cartElements.length <= 0 ? "" : <span className="cartCount">{cartElements.length}</span>}
-                    <img src={cartImage} alt="cart icon" />
-                </button>
+
 
                 {isCartOpen && (
                     <div
+                        data-testid="cart-overlay"
                         className={isCartOpen ? "modal fade show" : "modal fade"}
 
                         id="exampleModal"
@@ -167,7 +160,7 @@ export default class Cart extends Component {
 
                     >
 
-                        <div className="modal-dialog" data-testid="cart-overlay">
+                        <div className="modal-dialog" >
                             <div className="modal-content" >
 
                                 <div className="modal-body" id='modalBody' onClick={this.handleParentClose}>

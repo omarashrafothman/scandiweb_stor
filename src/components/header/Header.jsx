@@ -5,6 +5,7 @@ import { CartContext } from '../../context/CartContext.js';
 import { NavigationContext } from '../../context/NavigationProvider.js';
 import { GET_CATEGORIES } from "../../graphql/queries.js";
 import { API_BASE_URL } from "../../variables.js"
+import cartImage from "../../assets/images/shopping-cart.png";
 
 class Header extends Component {
     static contextType = CartContext;
@@ -120,6 +121,15 @@ class Header extends Component {
                                         </a>
                                     </div>
                                     <div className="shoppingCart" >
+                                        <button
+                                            data-testid="cart-btn"
+                                            type="button"
+                                            className="btn position-relative"
+                                            onClick={() => this.context.toggleCart(true)}
+                                        >
+                                            {this.context.cart.length <= 0 ? "" : <span className="cartCount">{this.context.cart.length}</span>}
+                                            <img src={cartImage} alt="cart icon" />
+                                        </button>
                                         <Cart cartElements={cart} />
                                     </div>
                                 </div>
