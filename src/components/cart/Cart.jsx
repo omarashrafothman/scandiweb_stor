@@ -154,7 +154,7 @@ export default class Cart extends Component {
                 {isCartOpen && (
                     <div
                         className={isCartOpen ? "modal fade show" : "modal fade"}
-                        data-testid="cart-overlay"
+
                         id="exampleModal"
                         tabIndex="-1"
                         style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}
@@ -167,7 +167,7 @@ export default class Cart extends Component {
 
                     >
 
-                        <div className="modal-dialog" id='dialog' >
+                        <div className="modal-dialog" data-testid="cart-overlay">
                             <div className="modal-content" >
 
                                 <div className="modal-body" id='modalBody' onClick={this.handleParentClose}>
