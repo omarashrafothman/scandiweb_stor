@@ -126,6 +126,14 @@ export default class Cart extends Component {
     closeModal = () => {
         this.context.toggleCart(false);
     };
+    // handleParentClose = (e) => {
+    //     console.log(e.target.id)
+    //     if (e.target.id !== "exampleModal") {
+    //         return
+    //     } else { this.closeModal(); }
+
+
+    // }
 
     render() {
         const { cartElements } = this.state;
@@ -150,13 +158,19 @@ export default class Cart extends Component {
                         id="exampleModal"
                         tabIndex="-1"
                         style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        onClick={(e) => {
+                            if (e.target.id === "exampleModal") {
+                                this.closeModal();
+                            }
+                        }}
 
-                        role="dialog"
+
                     >
-                        <div className="modal-dialog">
-                            <div className="modal-content">
 
-                                <div className="modal-body">
+                        <div className="modal-dialog" id='dialog' >
+                            <div className="modal-content" >
+
+                                <div className="modal-body" id='modalBody' onClick={this.handleParentClose}>
                                     <div className="cartHeading d-flex align-items-center">
                                         <h4>My Bag,</h4>
                                         <p className="m-0">{cartElements.length} {cartElements.length <= 1 ? "item" : "items"}</p>
@@ -304,12 +318,12 @@ export default class Cart extends Component {
                                             </button>
                                         </div>
                                     )}
-                                    <button onClick={this.closeModal} className="close-modal">
-                                        Close
-                                    </button>
+
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 )
                 }
