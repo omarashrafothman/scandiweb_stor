@@ -14,7 +14,7 @@ function App() {
 
           <Route index element={<Navigate to="/all" />} />
 
-          <Route path="/:categoryName" element={<CategoryPage />} />
+          <Route path=":categoryName" element={<CategoryPage />} />
           <Route path="product/:productId" element={<ProductDetails />} />
         </Route>
       </Routes>
