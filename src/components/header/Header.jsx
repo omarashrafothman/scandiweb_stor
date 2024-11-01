@@ -40,9 +40,9 @@ class Header extends Component {
     };
 
     handleLinkClick = (category, setSelectedParam) => (event) => {
-        event.preventDefault();
-        const newPath = `/${category}`;
-        window.history.pushState({}, "", newPath);
+
+        // const newPath = `/${category}`;
+        // window.history.pushState({}, "", newPath);
         setSelectedParam(category);
     };
 
@@ -67,7 +67,7 @@ class Header extends Component {
                                         <li className={selectedParam === "all" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
-                                                to="all"
+                                                to="/all"
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
                                                 data-testid={selectedParam == "all" ? 'active-category-link category-link' : 'category-link'}
                                             >
@@ -78,7 +78,7 @@ class Header extends Component {
                                         <li className={selectedParam == "clothes" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
-                                                to="clothes"
+                                                to="/clothes"
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
                                                 data-testid={selectedParam == "clothes" ? 'active-category-link category-link' : 'category-link'}
                                             >
@@ -89,7 +89,7 @@ class Header extends Component {
                                         <li className={selectedParam === "tech" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
-                                                to="tech"
+                                                to="/tech"
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
                                                 data-testid={selectedParam == "tech" ? 'active-category-link category-link' : 'category-link'}
                                             >
