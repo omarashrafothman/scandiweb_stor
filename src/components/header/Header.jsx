@@ -6,6 +6,7 @@ import { NavigationContext } from '../../context/NavigationProvider.js';
 import { GET_CATEGORIES } from "../../graphql/queries.js";
 import { API_BASE_URL } from "../../variables.js"
 import cartImage from "../../assets/images/shopping-cart.png";
+import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
     static contextType = CartContext;
@@ -63,36 +64,36 @@ class Header extends Component {
                                     <ul className="m-0 d-flex align-items-center pt-3">
 
                                         <li className={selectedParam === "all" ? "nav-item active" : "nav-item"}>
-                                            <a
+                                            <NavLink
                                                 className="nav-link"
-                                                href="/all"
+                                                to="/all"
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
                                                 data-testid={selectedParam === "all" ? 'active-category-link category-link' : 'category-link'}
                                             >
                                                 all
-                                            </a>
+                                            </NavLink>
                                         </li>
 
                                         <li className={selectedParam === "clothes" ? "nav-item active" : "nav-item"}>
-                                            <a
+                                            <NavLink
                                                 className="nav-link"
-                                                href="/clothes"
+                                                to="/clothes"
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
                                                 data-testid={selectedParam === "all" ? 'active-category-link category-link' : 'category-link'}
                                             >
                                                 clothes
-                                            </a>
+                                            </NavLink>
                                         </li>
 
                                         <li className={selectedParam === "tech" ? "nav-item active" : "nav-item"}>
-                                            <a
+                                            <NavLink
                                                 className="nav-link"
-                                                href="/tech"
+                                                to="/tech"
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
                                                 data-testid={selectedParam === "all" ? 'active-category-link category-link' : 'category-link'}
                                             >
                                                 tech
-                                            </a>
+                                            </NavLink>
                                         </li>
 
 
