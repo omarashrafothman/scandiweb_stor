@@ -13,11 +13,12 @@ export class NavigationProvider extends Component {
 
     getSelectedParam = () => {
         const pathSegments = window.location.pathname.split('/');
+        console.log(pathSegments)
 
         if (pathSegments.length > 2) {
             return pathSegments[2];
         }
-        return pathSegments[1] || "";
+        return pathSegments[1] || "all";
     };
 
     setSelectedParam = (param) => {
