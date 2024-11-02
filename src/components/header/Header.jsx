@@ -71,7 +71,7 @@ class Header extends Component {
                                                 className="nav-link"
 
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
-                                                data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
+                                            // data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
                                             >
                                                 all
                                             </a>
@@ -84,7 +84,8 @@ class Header extends Component {
 
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
 
-                                                data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}                                            >
+                                            // data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}  
+                                            >
                                                 clothes
                                             </a>
                                         </li>
@@ -96,7 +97,8 @@ class Header extends Component {
 
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
 
-                                                data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}                                            >
+                                            // data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}  
+                                            >
                                                 tech
                                             </a>
                                         </li>
