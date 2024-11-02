@@ -40,7 +40,7 @@ class Header extends Component {
     };
 
     handleLinkClick = (category, setSelectedParam) => (event) => {
-
+        event.preventDefault();
         const newPath = `/${category}`;
         window.history.pushState({}, "", newPath);
         setSelectedParam(category);
