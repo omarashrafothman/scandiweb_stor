@@ -67,7 +67,7 @@ class Header extends Component {
                                         <li className={selectedParam === "all" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
-                                                to="/"
+                                                to="/all"
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
                                                 data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
                                             >
