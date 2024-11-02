@@ -73,11 +73,11 @@ class Header extends Component {
                                             <a
                                                 href="/all"
                                                 className="nav-link"
-                                                // data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
+                                                data-testid={window.location.pathname.split('/')[1] === "all" ? 'active-category-link' : 'category-link'}
 
 
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
-                                                data-testid='active-category-link'
+
                                             >
                                                 all
                                             </a>
