@@ -66,10 +66,11 @@ class Header extends Component {
 
                                         <li className={selectedParam === "all" ? "nav-item active" : "nav-item"}>
                                             <a
-                                                className="nav-link"
                                                 href="/all"
+                                                className="nav-link"
+
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
-                                                data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
+                                                data-testid={selectedParam === "all" ? 'active-category-link category-link' : 'category-link'}
                                             >
                                                 all
                                             </a>
@@ -77,22 +78,24 @@ class Header extends Component {
 
                                         <li className={selectedParam === "clothes" ? "nav-item active" : "nav-item"}>
                                             <a
-                                                className="nav-link"
                                                 href="/clothes"
+                                                className="nav-link"
+
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
 
-                                                data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}                                            >
+                                                data-testid={selectedParam === "clothes" ? 'active-category-link category-link' : 'category-link'}                                            >
                                                 clothes
                                             </a>
                                         </li>
 
                                         <li className={selectedParam === "tech" ? "nav-item active" : "nav-item"}>
                                             <a
-                                                className="nav-link"
                                                 href="/tech"
+                                                className="nav-link"
+
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
 
-                                                data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}                                            >
+                                                data-testid={selectedParam === "tech" ? 'active-category-link category-link' : 'category-link'}                                            >
                                                 tech
                                             </a>
                                         </li>
