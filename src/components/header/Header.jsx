@@ -64,7 +64,7 @@ class Header extends Component {
                                 <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                                     <ul className="m-0 d-flex align-items-center pt-3 justify-content-between">
 
-                                        <li className={window.location.pathname === "/" ? "nav-item active" : "nav-item"}>
+                                        <li className={window.location.pathname === "/" || window.location.pathname.split('/')[1] === "all" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
                                                 to="/"
