@@ -11,9 +11,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-
           <Route index element={<Navigate to="/all" />} />
-
           <Route path=":categoryName" element={<CategoryPage />} />
           <Route path="product/:productId" element={<ProductDetails />} />
         </Route>
