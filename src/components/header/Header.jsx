@@ -64,12 +64,12 @@ class Header extends Component {
                                 <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                                     <ul className="m-0 d-flex align-items-center pt-3 justify-content-between">
 
-                                        <li className={selectedParam === "all" ? "nav-item active" : "nav-item"}>
+                                        <li className={window.location.pathname === "/" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
-                                                to="/all"
-                                                onClick={this.handleLinkClick("all", setSelectedParam)}
-                                                data-testid={selectedParam === "all" ? 'active-category-link-all' : 'category-link'}
+                                                to="/"
+                                                onClick={this.handleLinkClick("", setSelectedParam)}
+                                                data-testid={window.location.pathname === "/" ? 'active-category-link' : 'category-link'}
                                             >
                                                 all
                                             </NavLink>
@@ -81,7 +81,7 @@ class Header extends Component {
                                                 to="/clothes"
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
 
-                                                data-testid={selectedParam === "clothes" ? 'active-category-link-clothes' : 'category-link'}                                            >
+                                                data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}                                            >
                                                 clothes
                                             </NavLink>
                                         </li>
@@ -92,7 +92,7 @@ class Header extends Component {
                                                 to="/tech"
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
 
-                                                data-testid={selectedParam === "tech" ? 'active-category-link-tech' : 'category-link'}                                            >
+                                                data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}                                            >
                                                 tech
                                             </NavLink>
                                         </li>
