@@ -41,13 +41,11 @@ class Header extends Component {
 
     handleLinkClick = (category, setSelectedParam) => (event) => {
         event.preventDefault();
-
+        event.target.setAttribute('data-testid', 'active-category-link');
         const newPath = `/${category}`;
+        // window.history.pushState({}, "", newPath);
+        console.log(`التنقل إلى: ${category}`);
         setSelectedParam(category);
-        window.history.pushState({}, "", newPath);
-
-        // console.log(`التنقل إلى: ${category}`);
-
     };
 
 
