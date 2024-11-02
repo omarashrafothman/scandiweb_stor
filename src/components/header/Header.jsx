@@ -78,7 +78,7 @@ class Header extends Component {
                                         <li className={selectedParam === "clothes" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
-                                                to="clothes"
+                                                to="/clothes"
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
 
                                                 data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}                                            >
@@ -89,7 +89,7 @@ class Header extends Component {
                                         <li className={selectedParam === "tech" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
-                                                to="tech"
+                                                to="/tech"
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
 
                                                 data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}                                            >
