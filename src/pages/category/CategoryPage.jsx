@@ -3,8 +3,7 @@ import ProductBox from '../../components/product/ProductBox';
 import { GET_ALL_PRODUCT_WITH_CATEGORIES } from '../../graphql/queries.js';
 import slugify from 'react-slugify';
 import { NavigationContext } from '../../context/NavigationProvider.js';
-import { API_BASE_URL } from "../../variables.js";
-
+import { API_BASE_URL } from "../../variables.js"
 class CategoryPage extends Component {
     static contextType = NavigationContext;
 
@@ -12,11 +11,11 @@ class CategoryPage extends Component {
         products: [],
         loading: true,
         error: null,
-        categoryName: null, // اجعل categoryName متغير في الحالة
     };
 
     componentDidMount() {
-        this.fetchProducts(); // جلب المنتجات عند تحميل المكون
+        const { selectedParam } = this.context;
+        this.setState({ categoryName: selectedParam }, this.fetchProducts);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -28,6 +27,7 @@ class CategoryPage extends Component {
     }
 
     fetchProducts = async () => {
+
         try {
             const response = await fetch(API_BASE_URL, {
                 method: 'POST',
@@ -53,15 +53,14 @@ class CategoryPage extends Component {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error: {error}</p>;
 
-        // إذا لم يكن هناك categoryName، اجلب جميع المنتجات
-        let filteredProducts = !categoryName || categoryName === 'all'
+        let filteredProducts = categoryName === 'all'
             ? products
-            : products.filter(product => product.category.name.toLowerCase() === categoryName.toLowerCase());
+            : products.filter(product => product.category.name === categoryName);
 
         return (
             <div className='categoryPage'>
                 <div className='container py-5'>
-                    <h2>{categoryName ? `${categoryName}` : 'all'}</h2>
+                    <h2>{categoryName ? `${categoryName}` : 'Loading...'}</h2>
 
                     <div className='row'>
                         {filteredProducts.length > 0 ? (
