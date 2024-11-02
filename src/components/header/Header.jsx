@@ -11,9 +11,12 @@ import { NavLink } from 'react-router-dom';
 class Header extends Component {
     static contextType = CartContext;
 
+
     constructor(props) {
         super(props);
         this.state = { categories: [], error: null };
+
+
     }
 
     componentDidMount() {
@@ -43,7 +46,7 @@ class Header extends Component {
         event.preventDefault();
         event.target.setAttribute('data-testid', 'active-category-link');
         const newPath = `/${category}`;
-        // window.history.pushState({}, "", newPath);
+        window.history.pushState({}, "", newPath);
         console.log(`التنقل إلى: ${category}`);
         setSelectedParam(category);
     };
@@ -66,13 +69,15 @@ class Header extends Component {
                                 <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                                     <ul className="m-0 d-flex align-items-center pt-3 justify-content-between">
 
-                                        <li className={selectedParam === "all" ? "nav-item active" : "nav-item"}>
+                                        <li className={window.location.pathname.split('/')[1] === "all" ? "nav-item active" : "nav-item"}>
                                             <a
                                                 href="/all"
                                                 className="nav-link"
+                                                // data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
+
 
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
-                                            // data-testid={selectedParam === "all" ? 'active-category-link' : 'category-link'}
+                                                data-testid='active-category-link'
                                             >
                                                 all
                                             </a>
@@ -85,7 +90,7 @@ class Header extends Component {
 
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
 
-                                            // data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}
+                                                data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}
                                             >
                                                 clothes
                                             </a>
@@ -98,7 +103,7 @@ class Header extends Component {
 
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
 
-                                            // data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}
+                                                data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}
                                             >
                                                 tech
                                             </a>
