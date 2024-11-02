@@ -41,8 +41,8 @@ class Header extends Component {
 
     handleLinkClick = (category, setSelectedParam) => (event) => {
 
-        // const newPath = `/${category}`;
-        // window.history.pushState({}, "", newPath);
+        const newPath = `/${category}`;
+        window.history.pushState({}, "", newPath);
         setSelectedParam(category);
     };
 
@@ -100,13 +100,13 @@ class Header extends Component {
 
 
 
-
-                                        {/*     {categories.map((category) => (
+                                        {/*
+                                        {categories.map((category) => (
                                             <li
                                                 className={selectedParam === category.name ? "nav-item active" : "nav-item"}
                                                 key={category.name}
                                             >
-                                                <a
+                                                <NavLink
                                                     className="nav-link"
                                                     href={"/" + category.name}
                                                     onClick={this.handleLinkClick(category, setSelectedParam)}
@@ -114,7 +114,7 @@ class Header extends Component {
 
                                                 >
                                                     {category.name}
-                                                </a>
+                                                </NavLink>
                                             </li>
                                         ))}*/}
                                     </ul>
