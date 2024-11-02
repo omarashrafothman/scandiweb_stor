@@ -62,25 +62,25 @@ class Header extends Component {
                         <nav className="navbar navbar-expand-lg">
                             <div className="container">
                                 <div className="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
-                                    <ul className="m-0 d-flex align-items-center pt-3">
+                                    <ul className="m-0 d-flex align-items-center pt-3 justify-content-between">
                                         {console.log(selectedParam)}
                                         <li className={selectedParam === "all" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
                                                 to="/all"
                                                 onClick={this.handleLinkClick("all", setSelectedParam)}
-                                            // data-testid={selectedParam == "all" ? 'active-category-link category-link' : 'category-link'}
+                                                data-testid={selectedParam === "all" ? 'active-category-link category-link' : 'category-link'}
                                             >
                                                 all
                                             </NavLink>
                                         </li>
 
-                                        <li className={selectedParam == "clothes" ? "nav-item active" : "nav-item"}>
+                                        <li className={selectedParam === "clothes" ? "nav-item active" : "nav-item"}>
                                             <NavLink
                                                 className="nav-link"
                                                 to="/clothes"
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
-                                            // data-testid={selectedParam == "clothes" ? 'active-category-link category-link' : 'category-link'}
+                                                data-testid={selectedParam === "clothes" ? 'active-category-link category-link' : 'category-link'}
                                             >
                                                 clothes
                                             </NavLink>
@@ -91,7 +91,7 @@ class Header extends Component {
                                                 className="nav-link"
                                                 to="/tech"
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
-                                            // data-testid={selectedParam == "tech" ? 'active-category-link category-link' : 'category-link'}
+                                                data-testid={selectedParam === "tech" ? 'active-category-link category-link' : 'category-link'}
                                             >
                                                 tech
                                             </NavLink>
