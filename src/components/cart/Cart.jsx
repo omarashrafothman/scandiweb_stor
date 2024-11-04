@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import cartImage from "../../assets/images/shopping-cart.png";
+
 import { CartContext } from '../../context/CartContext.js';
 import slugify from 'react-slugify';
 import { API_BASE_URL } from "../../variables.js";
@@ -9,12 +9,14 @@ export default class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
             cartElements: this.props.cartElements || [],
         };
     }
 
     componentDidMount() {
         this.context.fetchCart();
+
     }
 
     componentDidUpdate(prevProps) {
@@ -25,62 +27,8 @@ export default class Cart extends Component {
         }
     }
 
-    incrementQuantity = (cartItemId) => {
-        this.setState((prevState) => {
-            const updatedCart = prevState.cartElements.map((item) => {
-                if (item.id === cartItemId) {
-                    return {
-                        ...item,
-                        quantity: item.quantity + 1,
-                    };
-                }
-                return item;
-            });
-            return { cartElements: updatedCart };
-        });
-    };
 
-    decrementQuantity = async (cartItemId) => {
-        this.setState((prevState) => {
-            const updatedCart = prevState.cartElements.map((item) => {
-                if (item.id === cartItemId) {
-                    const newQuantity = item.quantity - 1;
-                    if (newQuantity >= 0) {
-                        return {
-                            ...item,
-                            quantity: newQuantity,
-                        };
-                    }
-                }
-                return item;
-            }).filter(item => item.quantity > 0);
 
-            return { cartElements: updatedCart };
-        });
-
-        const cartItem = this.state.cartElements.find(item => item.id === cartItemId);
-        if (cartItem && cartItem.quantity === 1) {
-            await this.removeFromCartMutation(cartItem.sku_id);
-        }
-    };
-
-    removeFromCartMutation = async (sku_id) => {
-        try {
-            const response = await fetch(API_BASE_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    query: `mutation { removeFromCart(sku_id: ${sku_id}) { id } }`,
-                }),
-            });
-            const result = await response.json();
-            if (result.errors) {
-                console.error("Error removing item from cart", result.errors);
-            }
-        } catch (error) {
-            console.error("Network error while removing item from cart", error);
-        }
-    };
 
     calculateTotalPrice = (cartItem) => {
         return cartItem.quantity * cartItem.product.prices[0].amount;
@@ -138,6 +86,9 @@ export default class Cart extends Component {
     render() {
         const { cartElements } = this.state;
         const { isCartOpen } = this.context;
+        const { cart } = this.context;
+        console.log(cart)
+
 
         return (
             <div>
@@ -266,7 +217,7 @@ export default class Cart extends Component {
                                                             <button
                                                                 data-testid="cart-item-amount-increase"
                                                                 className="d-flex align-items-center justify-content-center"
-                                                                onClick={() => this.incrementQuantity(cartItem.id)}
+                                                                onClick={() => this.context.incrementQuantity(cartItem.id)}
                                                             >
                                                                 +
                                                             </button>
@@ -274,7 +225,7 @@ export default class Cart extends Component {
                                                             <button
                                                                 data-testid="cart-item-amount-decrease"
                                                                 className="d-flex align-items-center justify-content-center"
-                                                                onClick={() => this.decrementQuantity(cartItem.id)}
+                                                                onClick={() => this.context.decrementQuantity(cartItem.id)}
                                                             >
                                                                 -
                                                             </button>
