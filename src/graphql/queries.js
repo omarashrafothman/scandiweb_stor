@@ -27,6 +27,14 @@ export const GET_ALL_PRODUCT_WITH_CATEGORIES = `
                             currency_label
                             currency_symbol
                         }
+                        attributes{
+                        name
+                        id
+                        items{
+                        id
+                        value
+                        }
+                      }
                     }
                 }
             `;

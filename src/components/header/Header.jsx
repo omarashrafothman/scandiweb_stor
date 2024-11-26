@@ -6,7 +6,7 @@ import { NavigationContext } from '../../context/NavigationProvider.js';
 import { GET_CATEGORIES } from "../../graphql/queries.js";
 import { API_BASE_URL } from "../../variables.js"
 import cartImage from "../../assets/images/shopping-cart.png";
-import { NavLink } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 class Header extends Component {
     static contextType = CartContext;
@@ -42,15 +42,19 @@ class Header extends Component {
         }
     };
 
+
     handleLinkClick = (category, setSelectedParam) => (event) => {
         event.preventDefault();
-        event.target.setAttribute('data-testid', 'active-category-link');
+
+
         const newPath = `/${category}`;
         window.history.pushState({}, "", newPath);
-        console.log(`التنقل إلى: ${category}`);
-        setSelectedParam(category);
-    };
 
+
+        setSelectedParam(category);
+
+        window.dispatchEvent(new PopStateEvent("popstate"));
+    };
 
 
     render() {
@@ -70,8 +74,8 @@ class Header extends Component {
                                     <ul className="m-0 d-flex align-items-center pt-3 justify-content-between">
 
                                         <li className={window.location.pathname.split('/')[1] === "all" ? "nav-item active" : "nav-item"}>
-                                            <a
-                                                href="/all"
+                                            <Link
+                                                to="/all"
                                                 className="nav-link"
                                                 data-testid={window.location.pathname.split('/')[1] === "all" ? 'active-category-link' : 'category-link'}
 
@@ -80,12 +84,12 @@ class Header extends Component {
 
                                             >
                                                 all
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className={selectedParam === "clothes" ? "nav-item active" : "nav-item"}>
-                                            <a
-                                                href="/clothes"
+                                            <Link
+                                                to="/clothes"
                                                 className="nav-link"
 
                                                 onClick={this.handleLinkClick("clothes", setSelectedParam)}
@@ -93,12 +97,12 @@ class Header extends Component {
                                                 data-testid={selectedParam === "clothes" ? 'active-category-link' : 'category-link'}
                                             >
                                                 clothes
-                                            </a>
+                                            </Link>
                                         </li>
 
                                         <li className={selectedParam === "tech" ? "nav-item active" : "nav-item"}>
-                                            <a
-                                                href="/tech"
+                                            <Link
+                                                to="/tech"
                                                 className="nav-link"
 
                                                 onClick={this.handleLinkClick("tech", setSelectedParam)}
@@ -106,7 +110,7 @@ class Header extends Component {
                                                 data-testid={selectedParam === "tech" ? 'active-category-link' : 'category-link'}
                                             >
                                                 tech
-                                            </a>
+                                            </Link>
                                         </li>
 
 

@@ -87,7 +87,7 @@ export default class Cart extends Component {
         const { cartElements } = this.state;
         const { isCartOpen } = this.context;
         const { cart } = this.context;
-        console.log(cart)
+
 
 
         return (
@@ -101,7 +101,7 @@ export default class Cart extends Component {
 
                         id="exampleModal"
                         tabIndex="-1"
-                        style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}
+                        style={{ display: 'block', backgroundColor: 'rgba(57, 55, 72, 0.22)' }}
                         onClick={(e) => {
                             if (e.target.id === "exampleModal") {
                                 this.closeModal();

@@ -8,19 +8,46 @@ import { CartContext } from '../../context/CartContext.js';
 export default class ProductBox extends Component {
     static contextType = CartContext;
 
-    handleAddToCart = (skuId) => {
-        this.context.addToCart(skuId);
+
+
+    handleAddToCart = (skuId, color, size, capacity) => {
+        this.context.addToCart(skuId, color, size, capacity);
     };
 
     render() {
-        const { image, name, price, id, stock } = this.props;
+        const { image, name, price, id, stock, attributes } = this.props;
 
 
+
+
+
+
+        const getFirstAttribute = () => {
+            let firstSize;
+            let firstColor;
+            let firstCapacity;
+            attributes.map((item) => {
+
+                if (item.name === "size") {
+                    firstSize = item.items[0].value;
+
+                } else if (item.name === "capacity") {
+                    firstCapacity = item.items[0].value;
+
+                } else {
+                    firstColor = item.items[0].value;
+
+
+                }
+            })
+            this.handleAddToCart(id, firstColor, firstSize, firstCapacity)
+        }
         return (
             <div className='productBox' >
-                {!stock ? "" : <NavLink className='addToCart bo ' to={`/product/${id}`}>
+                {!stock ? "" : <button className='addToCart bo '
+                    onClick={() => getFirstAttribute()}>
                     <img src={shoppingCart} alt='add to cart' />
-                </NavLink>}
+                </button>}
                 {!stock ? <span className='stockStatus'>
                     <p>OUT OF STOCK</p>
                 </span> : ""}

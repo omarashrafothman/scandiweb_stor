@@ -8,12 +8,12 @@ export default class MainLayout extends Component {
     render() {
 
 
-        const params = window.location.pathname.split('/')[1];
+        // const params = window.location.pathname.split('/')[1];
 
         return (
             <>
                 <NavigationProvider>
-                    <Header params={params} />
+                    <Header />
                     <Outlet />
                 </NavigationProvider>
             </>

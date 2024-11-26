@@ -8,6 +8,7 @@ import { API_BASE_URL } from "../../variables.js";
 class ProductDetails extends Component {
     static contextType = CartContext;
 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +23,7 @@ class ProductDetails extends Component {
     componentDidMount() {
         this.fetchProductDetails();
         this.updateUrl(); // Update the URL when the component mounts
+
     }
 
     updateUrl = () => {
@@ -109,7 +111,7 @@ class ProductDetails extends Component {
 
     render() {
         const { product, loading, error, selectedAttributes } = this.state;
-        console.log(API_BASE_URL)
+
         const capacity = selectedAttributes['capacity'] || null;
         const color = selectedAttributes['color'] || null;
         const size = selectedAttributes['size'] || null;

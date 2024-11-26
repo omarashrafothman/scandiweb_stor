@@ -50,6 +50,7 @@ class CategoryPage extends Component {
     render() {
         const { categoryName, products, loading, error } = this.state;
 
+
         if (loading) return <p>Loading...</p>;
         if (error) return <p>Error: {error}</p>;
 
@@ -72,6 +73,7 @@ class CategoryPage extends Component {
                                         price={product.prices[0].amount}
                                         id={product.sku_id}
                                         stock={product.in_stock}
+                                        attributes={product.attributes}
                                     />
                                 </div>
                             ))
